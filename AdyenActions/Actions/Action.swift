@@ -11,7 +11,7 @@ public enum Action: Decodable {
     
     /// Indicates the user should be redirected to a URL.
     case redirect(RedirectAction)
-    
+
     /// Indicates the user should be redirected to an SDK.
     case sdk(SDKAction)
     
@@ -47,8 +47,10 @@ public enum Action: Decodable {
         let type = try container.decode(ActionType.self, forKey: .type)
         
         switch type {
-        case .redirect, .nativeRedirect:
+        case .redirect:
             self = try .redirect(RedirectAction(from: decoder))
+        case .nativeRedirect:
+            self = try .redirect(NativeRedirectAction(from: decoder))
         case .threeDS2Fingerprint:
             self = try .threeDS2Fingerprint(ThreeDS2FingerprintAction(from: decoder))
         case .threeDS2Challenge:
