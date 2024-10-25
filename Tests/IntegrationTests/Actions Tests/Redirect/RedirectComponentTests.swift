@@ -283,7 +283,7 @@ class RedirectComponentTests: XCTestCase {
         }
         delegate.onDidFail = { _, _ in XCTFail("Should not call onDidFail") }
         
-        let action = RedirectAction(url: URL(string: "https://google.com")!, paymentData: nil, nativeRedirectData: "test_nativeRedirectData")
+        let action = NativeRedirectAction(url: URL(string: "https://google.com")!, paymentData: nil, nativeRedirectData: "test_nativeRedirectData")
         sut.handle(action)
         XCTAssertTrue(RedirectComponent.applicationDidOpen(from: URL(string: "url://?queryParam=value")!))
         
@@ -311,7 +311,7 @@ class RedirectComponentTests: XCTestCase {
             XCTFail("Should not call onDidProvide")
         }
         
-        let action = RedirectAction(url: URL(string: "https://google.com")!, paymentData: nil, nativeRedirectData: "test_nativeRedirectData")
+        let action = NativeRedirectAction(url: URL(string: "https://google.com")!, paymentData: nil, nativeRedirectData: "test_nativeRedirectData")
         sut.handle(action)
         XCTAssertFalse(RedirectComponent.applicationDidOpen(from: URL(string: "url://")!))
         
@@ -343,7 +343,7 @@ class RedirectComponentTests: XCTestCase {
             redirectExpectation.fulfill()
         }
         
-        let action = RedirectAction(url: URL(string: "https://google.com")!, paymentData: nil, nativeRedirectData: "test_nativeRedirectData")
+        let action = NativeRedirectAction(url: URL(string: "https://google.com")!, paymentData: nil, nativeRedirectData: "test_nativeRedirectData")
         sut.handle(action)
         XCTAssertTrue(RedirectComponent.applicationDidOpen(from: URL(string: "url://?queryParam=value")!))
         
