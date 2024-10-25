@@ -114,7 +114,10 @@ open class FormViewController: UIViewController, AdyenObserver, PreferredContent
 
     override open func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        resetForm()
+
+        if scrollEnabled {
+            resetForm()
+        }
     }
 
     override public var preferredContentSize: CGSize {
