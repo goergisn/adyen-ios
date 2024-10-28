@@ -9,19 +9,55 @@ import Foundation
 /// Describes an action in which the user is redirected to a URL.
 public class RedirectAction: Decodable {
 
+    private enum Constants {
+        static let nativeRedirectType = "nativeRedirect"
+    }
+
     /// The URL to which to redirect the user.
     public let url: URL
 
     /// The server-generated payment data that should be submitted to the `/payments/details` endpoint.
     public let paymentData: String?
 
+    /// Native redirect data.
+    public let nativeRedirectData: String?
+
+    internal let isNaviteRedirect: Bool
+
     /// Initializes a redirect action.
     ///
     /// - Parameters:
     ///   - url: The URL to which to redirect the user.
     ///   - paymentData: The server-generated payment data that should be submitted to the `/payments/details` endpoint.
-    public init(url: URL, paymentData: String?) {
+    ///   - nativeRedirectData: Native redirect data.
+    public init(
+        url: URL,
+        paymentData: String?,
+        nativeRedirectData: String? = nil
+    ) {
         self.url = url
         self.paymentData = paymentData
+        self.nativeRedirectData = nativeRedirectData
+        self.isNaviteRedirect = nativeRedirectData != nil
+
+    }
+
+    public required init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.url = try container.decode(URL.self, forKey: .url)
+        self.paymentData = try container.decodeIfPresent(String.self, forKey: .paymentData)
+        self.nativeRedirectData = try container.decodeIfPresent(String.self, forKey: .nativeRedirectData)
+
+        let redirectType = try container.decode(String.self, forKey: .type)
+        self.isNaviteRedirect = redirectType == Constants.nativeRedirectType
+    }
+
+    // MARK: - Private
+
+    private enum CodingKeys: CodingKey {
+        case url
+        case paymentData
+        case nativeRedirectData
+        case type
     }
 }

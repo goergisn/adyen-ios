@@ -26,7 +26,7 @@ class ThreeDS2FingerprintSubmitterTests: XCTestCase {
         let apiClient = APIClientMock()
         let sut = ThreeDS2FingerprintSubmitter(apiContext: Dummy.apiContext, apiClient: apiClient)
 
-        let mockedRedirectAction = RedirectAction(url: URL(string: "https://www.adyen.com")!, paymentData: "data")
+        let mockedRedirectAction = RedirectAction(url: URL(string: "https://www.adyen.com")!, paymentData: "data", nativeRedirectData: <#String?#>)
         let mockedAction = Action.redirect(mockedRedirectAction)
         let mockedResponse = Submit3DS2FingerprintResponse(result: .action(mockedAction))
         apiClient.mockedResults = [.success(mockedResponse)]

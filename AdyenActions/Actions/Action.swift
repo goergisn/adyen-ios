@@ -47,10 +47,8 @@ public enum Action: Decodable {
         let type = try container.decode(ActionType.self, forKey: .type)
         
         switch type {
-        case .redirect:
+        case .redirect, .nativeRedirect:
             self = try .redirect(RedirectAction(from: decoder))
-        case .nativeRedirect:
-            self = try .redirect(NativeRedirectAction(from: decoder))
         case .threeDS2Fingerprint:
             self = try .threeDS2Fingerprint(ThreeDS2FingerprintAction(from: decoder))
         case .threeDS2Challenge:
