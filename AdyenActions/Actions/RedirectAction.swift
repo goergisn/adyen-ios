@@ -9,8 +9,20 @@ import Foundation
 /// Describes an action in which the user is redirected to a URL.
 public class RedirectAction: Decodable {
 
-    private enum Constants {
-        static let nativeRedirectType = "nativeRedirect"
+    public enum RedirectType: Decodable {
+        case redirect
+        case nativeRedirect
+
+        public init(from decoder: Decoder) throws {
+            let container = try decoder.singleValueContainer()
+            let type = try? container.decode(String.self)
+            switch type {
+            case "nativeRedirect": self = .nativeRedirect
+            case "redirect": self = .redirect
+            default:
+                self = .redirect
+            }
+        }
     }
 
     /// The URL to which to redirect the user.
@@ -19,10 +31,11 @@ public class RedirectAction: Decodable {
     /// The server-generated payment data that should be submitted to the `/payments/details` endpoint.
     public let paymentData: String?
 
+    /// Redirect type
+    public let type: RedirectType
+
     /// Native redirect data.
     public let nativeRedirectData: String?
-
-    internal let isNaviteRedirect: Bool
 
     /// Initializes a redirect action.
     ///
@@ -33,23 +46,21 @@ public class RedirectAction: Decodable {
     public init(
         url: URL,
         paymentData: String?,
+        type: RedirectType = .redirect,
         nativeRedirectData: String? = nil
     ) {
         self.url = url
         self.paymentData = paymentData
+        self.type = type
         self.nativeRedirectData = nativeRedirectData
-        self.isNaviteRedirect = nativeRedirectData != nil
-
     }
 
     public required init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.url = try container.decode(URL.self, forKey: .url)
         self.paymentData = try container.decodeIfPresent(String.self, forKey: .paymentData)
+        self.type = try container.decode(RedirectType.self, forKey: .type)
         self.nativeRedirectData = try container.decodeIfPresent(String.self, forKey: .nativeRedirectData)
-
-        let redirectType = try container.decode(String.self, forKey: .type)
-        self.isNaviteRedirect = redirectType == Constants.nativeRedirectType
     }
 
     // MARK: - Private
@@ -57,7 +68,7 @@ public class RedirectAction: Decodable {
     private enum CodingKeys: CodingKey {
         case url
         case paymentData
-        case nativeRedirectData
         case type
+        case nativeRedirectData
     }
 }

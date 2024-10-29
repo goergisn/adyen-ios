@@ -172,13 +172,14 @@ public final class RedirectComponent: ActionComponent {
     }
     
     private func didOpen(url returnURL: URL, _ action: RedirectAction) throws {
-        if action.isNaviteRedirect {
+        switch action.type {
+        case .nativeRedirect:
             try handleNativeMobileRedirect(
                 withReturnURL: returnURL,
                 redirectStateData: action.nativeRedirectData,
                 action
             )
-        } else {
+        case .redirect:
             try notifyDelegateDidProvide(redirectDetails: RedirectDetails(returnURL: returnURL), action)
         }
     }

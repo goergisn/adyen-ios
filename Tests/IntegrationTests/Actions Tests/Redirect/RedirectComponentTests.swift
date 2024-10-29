@@ -286,6 +286,7 @@ class RedirectComponentTests: XCTestCase {
         let action = RedirectAction(
             url: URL(string: "https://google.com")!,
             paymentData: nil,
+            type: .nativeRedirect,
             nativeRedirectData: "test_nativeRedirectData"
         )
         sut.handle(action)
@@ -318,6 +319,7 @@ class RedirectComponentTests: XCTestCase {
         let action = RedirectAction(
             url: URL(string: "https://google.com")!,
             paymentData: nil,
+            type: .nativeRedirect,
             nativeRedirectData: "test_nativeRedirectData"
         )
         sut.handle(action)
@@ -354,6 +356,7 @@ class RedirectComponentTests: XCTestCase {
         let action = RedirectAction(
             url: URL(string: "https://google.com")!,
             paymentData: nil,
+            type: .nativeRedirect,
             nativeRedirectData: "test_nativeRedirectData"
         )
         sut.handle(action)
@@ -391,6 +394,7 @@ class RedirectComponentTests: XCTestCase {
         let action = RedirectAction(
             url: URL(string: "https://google.com")!,
             paymentData: nil,
+            type: .nativeRedirect,
             nativeRedirectData: nil
         )
         sut.handle(action)
