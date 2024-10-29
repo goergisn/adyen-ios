@@ -8,7 +8,8 @@ import Foundation
 
 /// Describes an action in which the user is redirected to a URL.
 public struct RedirectAction: Decodable {
-
+    
+    /// The redirect flow type used by the `RedirectAction` object.
     public enum RedirectType: Decodable {
         case redirect
         case nativeRedirect
@@ -31,7 +32,7 @@ public struct RedirectAction: Decodable {
     /// The server-generated payment data that should be submitted to the `/payments/details` endpoint.
     public let paymentData: String?
 
-    /// Redirect type
+    /// Redirect type.
     public let type: RedirectType
 
     /// Native redirect data.
@@ -42,7 +43,8 @@ public struct RedirectAction: Decodable {
     /// - Parameters:
     ///   - url: The URL to which to redirect the user.
     ///   - paymentData: The server-generated payment data that should be submitted to the `/payments/details` endpoint.
-    ///   - nativeRedirectData: Native redirect data.
+    ///   - type: The redirect flow  used by the action. Defaults to `redirect`.
+    ///   - nativeRedirectData: Native redirect data. Defaults to `nil`.
     public init(
         url: URL,
         paymentData: String?,
