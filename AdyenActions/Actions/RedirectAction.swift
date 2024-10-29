@@ -7,7 +7,7 @@
 import Foundation
 
 /// Describes an action in which the user is redirected to a URL.
-public class RedirectAction: Decodable {
+public struct RedirectAction: Decodable {
 
     public enum RedirectType: Decodable {
         case redirect
@@ -55,7 +55,7 @@ public class RedirectAction: Decodable {
         self.nativeRedirectData = nativeRedirectData
     }
 
-    public required init(from decoder: any Decoder) throws {
+    public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.url = try container.decode(URL.self, forKey: .url)
         self.paymentData = try container.decodeIfPresent(String.self, forKey: .paymentData)
