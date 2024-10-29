@@ -9,7 +9,7 @@ import Foundation
 /// Describes an action in which the user is redirected to a URL.
 public struct RedirectAction: Decodable {
     
-    /// The redirect flow type used by the `RedirectAction` object.
+    /// Defines the type of redirect flow utilized by the `RedirectAction` object.
     public enum RedirectType: Decodable {
         case redirect
         case nativeRedirect
