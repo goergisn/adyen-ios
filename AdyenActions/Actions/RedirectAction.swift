@@ -10,19 +10,14 @@ import Foundation
 public struct RedirectAction: Decodable {
     
     /// Defines the type of redirect flow utilized by the `RedirectAction` object.
-    public enum RedirectType: Decodable {
+    public enum RedirectType: String, Decodable {
         case redirect
         case nativeRedirect
 
         public init(from decoder: Decoder) throws {
             let container = try decoder.singleValueContainer()
-            let type = try? container.decode(String.self)
-            switch type {
-            case "nativeRedirect": self = .nativeRedirect
-            case "redirect": self = .redirect
-            default:
-                self = .redirect
-            }
+            let type = try container.decode(String.self)
+            self = RedirectType(rawValue: type) ?? .redirect
         }
     }
 
