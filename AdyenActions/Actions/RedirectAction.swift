@@ -11,8 +11,9 @@ public struct RedirectAction: Decodable {
     
     /// Defines the type of redirect flow utilized by the `RedirectAction` object.
     public enum RedirectType: String, Decodable {
-        case redirect
-        case nativeRedirect
+        // swiftlint:disable redundant_string_enum_value
+        case redirect = "redirect"
+        case nativeRedirect = "nativeRedirect"
 
         public init(from decoder: Decoder) throws {
             let container = try decoder.singleValueContainer()
