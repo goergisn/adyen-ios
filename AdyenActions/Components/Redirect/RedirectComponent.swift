@@ -137,7 +137,6 @@ public final class RedirectComponent: ActionComponent {
     private func registerRedirectBounceBackListener(_ action: RedirectAction) {
         RedirectListener.registerForURL { [weak self] returnURL in
             guard let self else { return }
-            
             self.didOpen(url: returnURL, action)
         }
     }
