@@ -37,7 +37,10 @@ public enum PaymentMethodType: RawRepresentable, Hashable, Codable {
     case econtextStores
     case econtextATM
     case econtextOnline
+    case boletoBancario
     case boleto
+    case boletoBancarioItau
+    case primeiroPayBoleto
     case affirm
     case oxxo
     case bacsDirectDebit
@@ -110,9 +113,10 @@ public enum PaymentMethodType: RawRepresentable, Hashable, Codable {
         case "econtext_stores": self = .econtextStores
         case "econtext_atm": self = .econtextATM
         case "econtext_online": self = .econtextOnline
+        case "boletobancario": self = .boletoBancario
+        case "boletobancario_itau": self = .boletoBancarioItau
         case "boletobancario_santander": self = .boleto
-        case "boletobancario": self = .boleto
-        case "primeiropay_boleto": self = .boleto
+        case "primeiropay_boleto": self = .primeiroPayBoleto
         case "affirm": self = .affirm
         case "oxxo": self = .oxxo
         case "directdebit_GB": self = .bacsDirectDebit
@@ -174,7 +178,10 @@ public enum PaymentMethodType: RawRepresentable, Hashable, Codable {
         case .econtextStores: return "econtext_stores"
         case .econtextATM: return "econtext_atm"
         case .econtextOnline: return "econtext_online"
+        case .boletoBancario: return "boletobancario"
         case .boleto: return "boletobancario_santander"
+        case .boletoBancarioItau: return "boletobancario_itau"
+        case .primeiroPayBoleto: return "primeiropay_boleto"
         case .affirm: return "affirm"
         case .oxxo: return "oxxo"
         case .bacsDirectDebit: return "directdebit_GB"
@@ -243,7 +250,10 @@ extension PaymentMethodType {
         case .econtextStores: return "econtext stores"
         case .econtextATM: return "econtext ATM"
         case .econtextOnline: return "econtext online"
-        case .boleto: return "boleto"
+        case .boletoBancario: return "boleto bancario"
+        case .boleto: return "boleto bancario santander"
+        case .boletoBancarioItau: return "boleto bancario itau"
+        case .primeiroPayBoleto: return "primeiro pay boleto"
         case .affirm: return "affirm"
         case .oxxo: return "OXXO"
         case .bacsDirectDebit: return "BACS direct debit"
