@@ -111,6 +111,8 @@ public enum PaymentMethodType: RawRepresentable, Hashable, Codable {
         case "econtext_atm": self = .econtextATM
         case "econtext_online": self = .econtextOnline
         case "boletobancario_santander": self = .boleto
+        case "boletobancario": self = .boleto
+        case "primeiropay_boleto": self = .boleto
         case "affirm": self = .affirm
         case "oxxo": self = .oxxo
         case "directdebit_GB": self = .bacsDirectDebit
