@@ -452,7 +452,7 @@ class ComponentManagerTests: XCTestCase {
         )
 
         // When
-        let paymentComponent = try XCTUnwrap(sut.regularComponents.first { $0.paymentMethod.type == .boleto })
+        let paymentComponent = try XCTUnwrap(sut.regularComponents.first { $0.paymentMethod.type == .boletoBancarioSantander })
 
         // Then
         let boletoComponent = try XCTUnwrap(paymentComponent as? BoletoComponent)

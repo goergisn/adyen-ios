@@ -38,7 +38,7 @@ public enum PaymentMethodType: RawRepresentable, Hashable, Codable {
     case econtextATM
     case econtextOnline
     case boletoBancario
-    case boleto
+    case boletoBancarioSantander
     case boletoBancarioItau
     case primeiroPayBoleto
     case affirm
@@ -115,7 +115,7 @@ public enum PaymentMethodType: RawRepresentable, Hashable, Codable {
         case "econtext_online": self = .econtextOnline
         case "boletobancario": self = .boletoBancario
         case "boletobancario_itau": self = .boletoBancarioItau
-        case "boletobancario_santander": self = .boleto
+        case "boletobancario_santander": self = .boletoBancarioSantander
         case "primeiropay_boleto": self = .primeiroPayBoleto
         case "affirm": self = .affirm
         case "oxxo": self = .oxxo
@@ -179,7 +179,7 @@ public enum PaymentMethodType: RawRepresentable, Hashable, Codable {
         case .econtextATM: return "econtext_atm"
         case .econtextOnline: return "econtext_online"
         case .boletoBancario: return "boletobancario"
-        case .boleto: return "boletobancario_santander"
+        case .boletoBancarioSantander: return "boletobancario_santander"
         case .boletoBancarioItau: return "boletobancario_itau"
         case .primeiroPayBoleto: return "primeiropay_boleto"
         case .affirm: return "affirm"
@@ -251,7 +251,7 @@ extension PaymentMethodType {
         case .econtextATM: return "econtext ATM"
         case .econtextOnline: return "econtext online"
         case .boletoBancario: return "boleto bancario"
-        case .boleto: return "boleto bancario santander"
+        case .boletoBancarioSantander: return "boleto bancario santander"
         case .boletoBancarioItau: return "boleto bancario itau"
         case .primeiroPayBoleto: return "primeiro pay boleto"
         case .affirm: return "affirm"
