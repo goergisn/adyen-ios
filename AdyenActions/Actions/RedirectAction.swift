@@ -28,7 +28,7 @@ public struct RedirectAction: Decodable {
     /// The server-generated payment data that should be submitted to the `/payments/details` endpoint.
     public let paymentData: String?
 
-    private let type: RedirectType
+    internal let type: RedirectType
 
     /// Native redirect data.
     public let nativeRedirectData: String?
