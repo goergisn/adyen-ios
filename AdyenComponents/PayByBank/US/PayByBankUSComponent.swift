@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-/// A component that handles a Twint payment.
+/// A component that handles a Pay by Bank US payment.
 public final class PayByBankUSComponent: PaymentComponent, PresentableComponent {
 
     /// The context object for this component.
@@ -60,9 +60,9 @@ public final class PayByBankUSComponent: PaymentComponent, PresentableComponent 
 
     // MARK: - Initializers
 
-    /// Initializes the Twint component.
+    /// Initializes the Pay by Bank US component.
     ///
-    /// - Parameter paymentMethod: The Twint  payment method.
+    /// - Parameter paymentMethod: The Pay by Bank US payment method.
     /// - Parameter context: The context object for this component.
     /// - Parameter configuration: The configuration for the component.
     public init(
