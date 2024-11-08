@@ -14,6 +14,8 @@ extension PayByBankUSComponent {
         private enum Constants {
             static let topPadding: CGFloat = 16
             static let bottomPadding: CGFloat = 8
+            static let subtitleLabelSpacing: CGFloat = 10
+            static let supportedBankLogosSpacing: CGFloat = 26
         }
         
         private let model: Model
@@ -21,6 +23,8 @@ extension PayByBankUSComponent {
         internal lazy var headerImageView: UIImageView = {
             UIImageView()
         }()
+        
+        internal let supportedBankLogosView: SupportedPaymentMethodLogosView
         
         internal lazy var titleLabel: UILabel = {
             let titleLabel = UILabel()
@@ -55,6 +59,12 @@ extension PayByBankUSComponent {
         
         public init(model: Model) {
             self.model = model
+            
+            supportedBankLogosView = SupportedPaymentMethodLogosView(
+                imageUrls: model.supportedBankLogoURLs,
+                trailingText: model.supportedBanksMoreText
+            )
+            
             super.init(nibName: nil, bundle: nil)
         }
         
@@ -78,13 +88,15 @@ extension PayByBankUSComponent {
             let contentStack = UIStackView(arrangedSubviews: [
                 headerImageView,
                 titleLabel,
+                supportedBankLogosView,
                 subtitleLabel,
                 messageLabel
             ])
             contentStack.spacing = 0
             contentStack.axis = .vertical
             contentStack.alignment = .center
-            contentStack.setCustomSpacing(10, after: subtitleLabel)
+            contentStack.setCustomSpacing(Constants.subtitleLabelSpacing, after: subtitleLabel)
+            contentStack.setCustomSpacing(Constants.supportedBankLogosSpacing, after: supportedBankLogosView)
             
             let contentButtonStack = UIStackView(arrangedSubviews: [
                 contentStack,
@@ -159,6 +171,8 @@ extension PayByBankUSComponent.ConfirmationViewController {
     internal class Model {
         
         internal let headerImageUrl: URL
+        internal let supportedBankLogoURLs: [URL]
+        internal let supportedBanksMoreText: String
         internal let title: String
         internal let subtitle: String
         internal let message: String
@@ -175,16 +189,21 @@ extension PayByBankUSComponent.ConfirmationViewController {
         }
         
         internal init(
+            title: String,
             headerImageUrl: URL,
+            supportedBankLogoNames: [String],
             style: PayByBankUSComponent.Style,
             localizationParameters: LocalizationParameters?,
+            logoUrlProvider: LogoURLProvider,
             continueHandler: @escaping () -> Void
         ) {
             self.headerImageUrl = headerImageUrl
-            self.title = localizedString(.payByBankConfirmationSheetTitle, localizationParameters)
-            self.subtitle = localizedString(.payByBankConfirmationSheetSubtitle, localizationParameters)
-            self.message = localizedString(.payByBankConfirmationSheetMessage, localizationParameters)
-            self.submitTitle = localizedString(.payByBankConfirmationSheetButtonTitle, localizationParameters)
+            self.supportedBankLogoURLs = supportedBankLogoNames.map { logoUrlProvider.logoURL(withName: $0) }
+            self.supportedBanksMoreText = localizedString(.payByBankAISDDMore, localizationParameters)
+            self.title = title
+            self.subtitle = localizedString(.payByBankAISDDDisclaimerHeader, localizationParameters)
+            self.message = localizedString(.payByBankAISDDDisclaimerBody, localizationParameters)
+            self.submitTitle = localizedString(.payByBankAISDDSubmit, localizationParameters)
             self.style = style
             self.continueHandler = continueHandler
         }

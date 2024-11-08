@@ -43,15 +43,15 @@ public final class PayByBankUSComponent: PaymentComponent, PresentableComponent 
     
     private lazy var confirmationViewController: ConfirmationViewController = {
 
-        let headerImageUrl = LogoURLProvider.logoURL(
-            withName: paymentMethod.type.rawValue,
-            environment: context.apiContext.environment
-        )
-        
+        let logoUrlProvider = LogoURLProvider(environment: context.apiContext.environment)
+     
         return .init(model: .init(
-            headerImageUrl: headerImageUrl,
+            title: paymentMethod.merchantProvidedDisplayInformation?.title ?? paymentMethod.name,
+            headerImageUrl: logoUrlProvider.logoURL(withName: paymentMethod.type.rawValue),
+            supportedBankLogoNames: PayByBankUSPaymentMethod.logoNames,
             style: configuration.style,
             localizationParameters: configuration.localizationParameters,
+            logoUrlProvider: LogoURLProvider(environment: context.apiContext.environment),
             continueHandler: { [weak self] in
                 self?.initiatePayment()
             }
