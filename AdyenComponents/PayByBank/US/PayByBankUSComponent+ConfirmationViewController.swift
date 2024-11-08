@@ -27,7 +27,7 @@ extension PayByBankUSComponent {
         internal lazy var titleLabel = Self.defaultLabel
         internal lazy var subtitleLabel = Self.defaultLabel
         internal lazy var messageLabel = Self.defaultLabel
-        internal lazy var submitButton: SubmitButton
+        internal let submitButton: SubmitButton
         
         // MARK: UIViewController
         
