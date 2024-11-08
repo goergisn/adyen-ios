@@ -47,8 +47,6 @@ public struct DisplayInformation: Equatable {
     /// An optional custom `accessibilityLabel` to use.
     @_spi(AdyenInternal)
     public let accessibilityLabel: String?
-    
-    // TODO: Allow adding a custom view - to show the bank icons
 
     /// Initializes a `DisplayInformation`
     ///

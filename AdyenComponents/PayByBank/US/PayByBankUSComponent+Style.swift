@@ -43,6 +43,12 @@ extension PayByBankUSComponent {
             contentMode: .scaleAspectFit
         )
         
+        public var submitButton: ButtonStyle = .init(
+            title: TextStyle(font: .preferredFont(forTextStyle: .headline), color: .white),
+            cornerRounding: .fixed(8),
+            background: UIColor.Adyen.defaultBlue
+        )
+        
         public init() {}
     }
 }

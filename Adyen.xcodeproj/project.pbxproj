@@ -152,9 +152,10 @@
 		8122B9BD2B9A0FF3002FC4D6 /* ErrorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8122B9BC2B9A0FF3002FC4D6 /* ErrorMock.swift */; };
 		81272F182CC7E1DD00D8773A /* PayByBankUSComponent+ConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81272F172CC7E1CF00D8773A /* PayByBankUSComponent+ConfirmationViewController.swift */; };
 		81272F1A2CC8FD4600D8773A /* PayByBankUSComponent+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81272F192CC8FD4600D8773A /* PayByBankUSComponent+Style.swift */; };
-		8128977C2CCA660A00275487 /* StoredPayByBankUSPaymentMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812897752CC8FEC100275487 /* StoredPayByBankUSPaymentMethod.swift */; };
 		8128977B2CC93CB100275487 /* SupportedPaymentMethodsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8128977A2CC93CB000275487 /* SupportedPaymentMethodsView.swift */; };
+		8128977C2CCA660A00275487 /* StoredPayByBankUSPaymentMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812897752CC8FEC100275487 /* StoredPayByBankUSPaymentMethod.swift */; };
 		8128977E2CCA6FE900275487 /* SupportedPaymentMethodLogosViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8128977D2CCA6FE400275487 /* SupportedPaymentMethodLogosViewTests.swift */; };
+		812B24872CDE56D90074A5D9 /* PayByBankUSComponent+ConfirmationViewController+Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812B24862CDE56D90074A5D9 /* PayByBankUSComponent+ConfirmationViewController+Model.swift */; };
 		8136619E2BE0F6F7009AA0CD /* Adyen3DS2 in Frameworks */ = {isa = PBXBuildFile; productRef = 8136619D2BE0F6F7009AA0CD /* Adyen3DS2 */; };
 		813BF1122B2365400096940E /* XCTestCase+FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813BF1102B2364E00096940E /* XCTestCase+FirstResponder.swift */; };
 		813BF1132B2365400096940E /* XCTestCase+FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813BF1102B2364E00096940E /* XCTestCase+FirstResponder.swift */; };
@@ -1621,6 +1622,7 @@
 		812897752CC8FEC100275487 /* StoredPayByBankUSPaymentMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredPayByBankUSPaymentMethod.swift; sourceTree = "<group>"; };
 		8128977A2CC93CB000275487 /* SupportedPaymentMethodsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportedPaymentMethodsView.swift; sourceTree = "<group>"; };
 		8128977D2CCA6FE400275487 /* SupportedPaymentMethodLogosViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportedPaymentMethodLogosViewTests.swift; sourceTree = "<group>"; };
+		812B24862CDE56D90074A5D9 /* PayByBankUSComponent+ConfirmationViewController+Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PayByBankUSComponent+ConfirmationViewController+Model.swift"; sourceTree = "<group>"; };
 		813BF1102B2364E00096940E /* XCTestCase+FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+FirstResponder.swift"; sourceTree = "<group>"; };
 		813EF9DD2A5DA0BC00C65D15 /* FormPickerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormPickerItem.swift; sourceTree = "<group>"; };
 		813EF9E12A5DA2D400C65D15 /* FormPickerItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormPickerItemView.swift; sourceTree = "<group>"; };
@@ -3159,6 +3161,7 @@
 			children = (
 				81D2186C2CC7D57100B7FC4C /* PayByBankUSComponent.swift */,
 				81272F172CC7E1CF00D8773A /* PayByBankUSComponent+ConfirmationViewController.swift */,
+				812B24862CDE56D90074A5D9 /* PayByBankUSComponent+ConfirmationViewController+Model.swift */,
 				81272F192CC8FD4600D8773A /* PayByBankUSComponent+Style.swift */,
 				81D2186E2CC7D7F900B7FC4C /* PayByBankUSComponent+Configuration.swift */,
 			);
@@ -7488,6 +7491,7 @@
 				F9175E9B259394F200D653BE /* IssuerListComponent.swift in Sources */,
 				A0414C21278C2AE400DF3FE9 /* ACHDirectDebitDetails.swift in Sources */,
 				00EACBAE2872EDEC0082B360 /* OnlineBankingDetails.swift in Sources */,
+				812B24872CDE56D90074A5D9 /* PayByBankUSComponent+ConfirmationViewController+Model.swift in Sources */,
 				C933801E276A06E1005B66CD /* BACSDirectDebitComponentTracker.swift in Sources */,
 				5A9889C8264E71210007F4C0 /* BoletoDetails.swift in Sources */,
 				C9F468E227465FCF00500FF5 /* BACSDirectDebitData.swift in Sources */,

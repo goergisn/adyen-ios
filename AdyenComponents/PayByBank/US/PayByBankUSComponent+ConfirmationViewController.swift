@@ -20,42 +20,16 @@ extension PayByBankUSComponent {
         
         private let model: Model
         
-        internal lazy var headerImageView: UIImageView = {
-            UIImageView()
-        }()
+        // MARK: Views
         
+        internal lazy var headerImageView = UIImageView()
         internal let supportedBankLogosView: SupportedPaymentMethodLogosView
+        internal lazy var titleLabel = Self.defaultLabel
+        internal lazy var subtitleLabel = Self.defaultLabel
+        internal lazy var messageLabel = Self.defaultLabel
+        internal lazy var submitButton: SubmitButton
         
-        internal lazy var titleLabel: UILabel = {
-            let titleLabel = UILabel()
-            titleLabel.numberOfLines = 0
-            titleLabel.textAlignment = .center
-            return titleLabel
-        }()
-        
-        internal lazy var subtitleLabel: UILabel = {
-            let titleLabel = UILabel()
-            titleLabel.numberOfLines = 0
-            titleLabel.textAlignment = .center
-            return titleLabel
-        }()
-        
-        internal lazy var messageLabel: UILabel = {
-            let titleLabel = UILabel()
-            titleLabel.numberOfLines = 0
-            titleLabel.textAlignment = .center
-            return titleLabel
-        }()
-        
-        internal lazy var submitButton: SubmitButton = {
-            let buttonStyle = ButtonStyle(
-                title: TextStyle(font: .preferredFont(forTextStyle: .headline), color: .white),
-                cornerRounding: .fixed(8),
-                background: UIColor.Adyen.defaultBlue
-            )
-            
-            return SubmitButton(style: buttonStyle)
-        }()
+        // MARK: UIViewController
         
         public init(model: Model) {
             self.model = model
@@ -64,72 +38,20 @@ extension PayByBankUSComponent {
                 imageUrls: model.supportedBankLogoURLs,
                 trailingText: model.supportedBanksMoreText
             )
+           
+            self.submitButton = SubmitButton(style: model.style.submitButton)
             
             super.init(nibName: nil, bundle: nil)
         }
         
         override public func viewDidLoad() {
             super.viewDidLoad()
-            
-            headerImageView.adyen.apply(model.style.headerImage)
-            
-            titleLabel.text = model.title
-            titleLabel.adyen.apply(model.style.title)
-            
-            subtitleLabel.text = model.subtitle
-            subtitleLabel.adyen.apply(model.style.subtitle)
-            
-            messageLabel.text = model.message
-            messageLabel.adyen.apply(model.style.message)
-            
-            submitButton.title = model.submitTitle
-            submitButton.addTarget(self, action: #selector(submitTapped), for: .touchUpInside)
-            
-            let contentStack = UIStackView(arrangedSubviews: [
-                headerImageView,
-                titleLabel,
-                supportedBankLogosView,
-                subtitleLabel,
-                messageLabel
-            ])
-            contentStack.spacing = 0
-            contentStack.axis = .vertical
-            contentStack.alignment = .center
-            contentStack.setCustomSpacing(Constants.subtitleLabelSpacing, after: subtitleLabel)
-            contentStack.setCustomSpacing(Constants.supportedBankLogosSpacing, after: supportedBankLogosView)
-            
-            let contentButtonStack = UIStackView(arrangedSubviews: [
-                contentStack,
-                submitButton
-            ])
-            contentButtonStack.spacing = 32
-            contentButtonStack.axis = .vertical
-            contentButtonStack.alignment = .fill
-            
-            view.addSubview(contentButtonStack)
-            contentButtonStack.adyen.anchor(
-                inside: view.layoutMarginsGuide,
-                with: .init(
-                    top: Constants.topPadding,
-                    left: 0,
-                    bottom: Constants.bottomPadding,
-                    right: 0
-                )
-            )
-            
-            model.loadHeaderImage(for: headerImageView)
-            
-            configureConstraints()
+            setupViews()
         }
         
         @available(*, unavailable)
         public required init?(coder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
-        }
-        
-        @objc private func submitTapped() {
-            submitButton.showsActivityIndicator = true
-            model.continueHandler()
         }
         
         override public var preferredContentSize: CGSize {
@@ -145,18 +67,6 @@ extension PayByBankUSComponent {
             """) }
         }
         
-        private func configureConstraints() {
-            
-            let constraints = [
-                headerImageView.widthAnchor.constraint(equalToConstant: model.headerImageViewSize.width),
-                headerImageView.heightAnchor.constraint(equalToConstant: model.headerImageViewSize.height)
-            ]
-
-            headerImageView.setContentHuggingPriority(.required, for: .horizontal)
-            
-            NSLayoutConstraint.activate(constraints)
-        }
-        
         override public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
             super.traitCollectionDidChange(previousTraitCollection)
             headerImageView.layer.borderColor = model.style.headerImage.borderColor?.cgColor ?? UIColor.Adyen.componentSeparator.cgColor
@@ -164,52 +74,81 @@ extension PayByBankUSComponent {
     }
 }
 
-// MARK: - Model
-
 extension PayByBankUSComponent.ConfirmationViewController {
+
+    static var defaultLabel: UILabel {
+        let titleLabel = UILabel()
+        titleLabel.numberOfLines = 0
+        titleLabel.textAlignment = .center
+        return titleLabel
+    }
     
-    internal class Model {
+    @objc private func submitTapped() {
+        submitButton.showsActivityIndicator = true
+        model.continueHandler()
+    }
+    
+    private func setupViews() {
+        headerImageView.adyen.apply(model.style.headerImage)
         
-        internal let headerImageUrl: URL
-        internal let supportedBankLogoURLs: [URL]
-        internal let supportedBanksMoreText: String
-        internal let title: String
-        internal let subtitle: String
-        internal let message: String
-        internal let submitTitle: String
+        titleLabel.text = model.title
+        titleLabel.adyen.apply(model.style.title)
         
-        internal let style: PayByBankUSComponent.Style
-        internal let headerImageViewSize = CGSize(width: 80, height: 52)
+        subtitleLabel.text = model.subtitle
+        subtitleLabel.adyen.apply(model.style.subtitle)
         
-        internal let continueHandler: () -> Void
+        messageLabel.text = model.message
+        messageLabel.adyen.apply(model.style.message)
         
-        private let imageLoader: ImageLoading = ImageLoaderProvider.imageLoader()
-        private var imageLoadingTask: AdyenCancellable? {
-            willSet { imageLoadingTask?.cancel() }
-        }
+        submitButton.title = model.submitTitle
+        submitButton.addTarget(self, action: #selector(submitTapped), for: .touchUpInside)
         
-        internal init(
-            title: String,
-            headerImageUrl: URL,
-            supportedBankLogoNames: [String],
-            style: PayByBankUSComponent.Style,
-            localizationParameters: LocalizationParameters?,
-            logoUrlProvider: LogoURLProvider,
-            continueHandler: @escaping () -> Void
-        ) {
-            self.headerImageUrl = headerImageUrl
-            self.supportedBankLogoURLs = supportedBankLogoNames.map { logoUrlProvider.logoURL(withName: $0) }
-            self.supportedBanksMoreText = localizedString(.payByBankAISDDMore, localizationParameters)
-            self.title = title
-            self.subtitle = localizedString(.payByBankAISDDDisclaimerHeader, localizationParameters)
-            self.message = localizedString(.payByBankAISDDDisclaimerBody, localizationParameters)
-            self.submitTitle = localizedString(.payByBankAISDDSubmit, localizationParameters)
-            self.style = style
-            self.continueHandler = continueHandler
-        }
+        let contentStack = UIStackView(arrangedSubviews: [
+            headerImageView,
+            titleLabel,
+            supportedBankLogosView,
+            subtitleLabel,
+            messageLabel
+        ])
+        contentStack.spacing = 0
+        contentStack.axis = .vertical
+        contentStack.alignment = .center
+        contentStack.setCustomSpacing(Constants.subtitleLabelSpacing, after: subtitleLabel)
+        contentStack.setCustomSpacing(Constants.supportedBankLogosSpacing, after: supportedBankLogosView)
         
-        internal func loadHeaderImage(for imageView: UIImageView) {
-            imageLoadingTask = imageView.load(url: headerImageUrl, using: imageLoader)
-        }
+        let contentButtonStack = UIStackView(arrangedSubviews: [
+            contentStack,
+            submitButton
+        ])
+        contentButtonStack.spacing = 32
+        contentButtonStack.axis = .vertical
+        contentButtonStack.alignment = .fill
+        
+        view.addSubview(contentButtonStack)
+        contentButtonStack.adyen.anchor(
+            inside: view.layoutMarginsGuide,
+            with: .init(
+                top: Constants.topPadding,
+                left: 0,
+                bottom: Constants.bottomPadding,
+                right: 0
+            )
+        )
+        
+        model.loadHeaderImage(for: headerImageView)
+        
+        configureConstraints()
+    }
+    
+    private func configureConstraints() {
+        
+        let constraints = [
+            headerImageView.widthAnchor.constraint(equalToConstant: model.headerImageViewSize.width),
+            headerImageView.heightAnchor.constraint(equalToConstant: model.headerImageViewSize.height)
+        ]
+
+        headerImageView.setContentHuggingPriority(.required, for: .horizontal)
+        
+        NSLayoutConstraint.activate(constraints)
     }
 }
