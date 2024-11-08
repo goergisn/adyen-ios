@@ -172,6 +172,10 @@
 "adyen.paybybank.subtitle" = "لم يتم العثور على أي بنوك لاستعلام البحث الخاص بك…";
 "adyen.paybybank.title" = "لا توجد نتائج لـ";
 "adyen.search.placeholder" = "بحث…";
+"adyen.payByBankAISDD.disclaimer.header" = "استخدم خدمة Pay by Bank للدفع الفوري من خلال أي حساب مصرفي.";
+"adyen.payByBankAISDD.disclaimer.body" = "من خلال ربط حسابك البنكي، أنت بذلك تمنحنا تفويضًا بخصم مدفوعات المبالغ المستحقة من حسابك البنكي، وذلك مقابل استخدام خدماتنا و/أو شراء منتجاتنا. ويستمر العمل بهذا التفويض إلى أن يتم إلغاؤه.";
+"adyen.payByBankAISDD.submit" = "المضي قُدمًا والدفع عن طريق البنك";
+"adyen.payByBankAISDD.more" = "+ المزيد";
 "adyen.upi.modeSelection" = "كيف تود استخدام معرف واجهة المدفوعات الموحدة (UPI)؟";
 "adyen.UPIVpa.validationMessage" = "أدخل عنوان دفع افتراضي صحيح";
 "adyen.UPIQrcode.generationMessage" = "أنشئ رمز الاستجابة السريعة الذي يمكنك تنزيله أو خذ لقطة شاشة له وقم بتحميله على تطبيق UPI لإكمال الدفع.";

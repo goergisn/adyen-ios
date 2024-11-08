@@ -172,6 +172,10 @@
 "adyen.paybybank.subtitle" = "No s'ha trobat cap banc amb la vostra consulta de cerca…";
 "adyen.paybybank.title" = "No hi ha resultats per a";
 "adyen.search.placeholder" = "Buscar…";
+"adyen.payByBankAISDD.disclaimer.header" = "Utilitzeu el pagament per banc per pagar a l'instant des de qualsevol compte bancari.";
+"adyen.payByBankAISDD.disclaimer.body" = "En connectar el vostre compte bancari, esteu autoritzant càrrecs a aquest compte per qualsevol import degut per l'ús dels nostres serveis o la compra dels nostres productes, fins que es revoqui aquesta autorització.";
+"adyen.payByBankAISDD.submit" = "Continua a pagament per banc";
+"adyen.payByBankAISDD.more" = "+ més";
 "adyen.upi.modeSelection" = "Com us agradaria utilitzar UPI?";
 "adyen.UPIVpa.validationMessage" = "Introduïu una adreça de pagament virtual correcta";
 "adyen.UPIQrcode.generationMessage" = "Genereu el codi QR que podeu baixar o feu una captura de pantalla i pugeu-la a l'aplicació UPI per completar el pagament.";

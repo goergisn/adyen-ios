@@ -168,6 +168,10 @@
 "adyen.paybybank.subtitle" = "Nu s-au găsit bănci cu interogarea de căutare…";
 "adyen.paybybank.title" = "Nu există rezultate pentru";
 "adyen.search.placeholder" = "Căutare…";
+"adyen.payByBankAISDD.disclaimer.header" = "Utilizați Plată prin bancă pentru a plăti instantaneu din orice cont bancar.";
+"adyen.payByBankAISDD.disclaimer.body" = "Prin conectarea contului dvs. bancar, autorizați debitarea din contul dvs. a oricărei sume datorate cu privire la utilizarea serviciilor noastre și/sau achiziționarea produselor noastre, până la revocarea acestei autorizații.";
+"adyen.payByBankAISDD.submit" = "Continuați către plata prin bancă";
+"adyen.payByBankAISDD.more" = "+ mai multe";
 "adyen.upi.modeSelection" = "Cum doriți să utilizați UPI?";
 "adyen.UPIVpa.validationMessage" = "Introduceți o adresă de plată virtuală corectă";
 "adyen.UPIQrcode.generationMessage" = "Generați codul QR pe care îl puteți descărca sau pe care îl puteți reda într-o captură de ecran și încărcați-l în aplicația UPI pentru a finaliza plata.";

@@ -172,6 +172,10 @@
 "adyen.paybybank.subtitle" = "A keresési lekérdezéssel nem található bank…";
 "adyen.paybybank.title" = "Nincs találat a következőre:";
 "adyen.search.placeholder" = "Keresés…";
+"adyen.payByBankAISDD.disclaimer.header" = "Ha bankszámláról szeretne azonnal fizetni, használja a Fizetés bankkal lehetőséget.";
+"adyen.payByBankAISDD.disclaimer.body" = "Bankszámlája csatlakoztatásával engedélyezi, hogy a szolgáltatásaink használatáért és/vagy termékeink megvásárlásáért levonandó összeget a számlájára terheljük egészen addig, amíg ezt az engedélyt vissza nem vonja.";
+"adyen.payByBankAISDD.submit" = "Tovább a Fizetés bankkal lehetőségre";
+"adyen.payByBankAISDD.more" = "+ továbbiak";
 "adyen.upi.modeSelection" = "Hogyan szeretné használni az UPI-t?";
 "adyen.UPIVpa.validationMessage" = "Adjon meg egy helyes virtuális fizetési címet";
 "adyen.UPIQrcode.generationMessage" = "Hozzon létre QR-kódot, amelyet letölthet vagy amelyről képernyőképet készíthet, és töltse fel az UPI alkalmazásba a fizetés végrehajtásához.";

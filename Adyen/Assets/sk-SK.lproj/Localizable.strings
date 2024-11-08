@@ -168,6 +168,10 @@
 "adyen.paybybank.subtitle" = "Pre váš vyhľadávací dotaz sa nenašli žiadne banky…";
 "adyen.paybybank.title" = "Žiadne výsledky pre";
 "adyen.search.placeholder" = "Vyhľadávanie…";
+"adyen.payByBankAISDD.disclaimer.header" = "Používajte Pay by Bank na okamžitú platbu z akéhokoľvek bankového účtu.";
+"adyen.payByBankAISDD.disclaimer.body" = "Pripojením svojho bankového účtu dávate súhlas na odpísanie akejkoľvek dlžnej sumy z vášho účtu za používanie našich služieb a/alebo nákup našich produktov, a to až do odvolania tohto súhlasu.";
+"adyen.payByBankAISDD.submit" = "Pokračovať v platbe bankou";
+"adyen.payByBankAISDD.more" = "+ ďalšie";
 "adyen.upi.modeSelection" = "Ako by ste chceli použiť UPI?";
 "adyen.UPIVpa.validationMessage" = "Zadajte správnu adresu pre virtuálnu platbu";
 "adyen.UPIQrcode.generationMessage" = "Vygenerujte kód QR. Ten si môžete stiahnuť alebo môžete urobiť snímku obrazovky a nahrať ju do aplikácie UPI na dokončenie platby.";

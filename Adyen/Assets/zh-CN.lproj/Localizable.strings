@@ -168,6 +168,10 @@
 "adyen.paybybank.subtitle" = "未找到搜索查询的银行……";
 "adyen.paybybank.title" = "无以下内容的结果：";
 "adyen.search.placeholder" = "搜索……";
+"adyen.payByBankAISDD.disclaimer.header" = "使用 Pay by Bank 从任何银行账户即时付款。";
+"adyen.payByBankAISDD.disclaimer.body" = "关联您的银行账户，即表示您授权从您的账户中扣除因使用我们的服务和/或购买我们的产品而需支付的任何金额，直至该授权被撤销。";
+"adyen.payByBankAISDD.submit" = "继续使用 Pay by Bank";
+"adyen.payByBankAISDD.more" = "+ 更多";
 "adyen.upi.modeSelection" = "您打算如何使用 UPI？";
 "adyen.UPIVpa.validationMessage" = "输入正确的虚拟支付地址";
 "adyen.UPIQrcode.generationMessage" = "生成可以下载或截屏的二维码，然后将其上传到 UPI 应用以完成付款。";

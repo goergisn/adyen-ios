@@ -168,6 +168,10 @@
 "adyen.paybybank.subtitle" = "您的搜尋查詢找不到任何銀行……";
 "adyen.paybybank.title" = "沒有以下結果：";
 "adyen.search.placeholder" = "搜尋……";
+"adyen.payByBankAISDD.disclaimer.header" = "運用銀行支付方式透過任何銀行帳戶立即付款。";
+"adyen.payByBankAISDD.disclaimer.body" = "連結您的銀行帳戶即表示您授權我們可以在您享有我們的服務和/或購買我們的產品時，向您的帳戶扣款對應的費用，直到授權被撤銷為止。";
+"adyen.payByBankAISDD.submit" = "繼續透過銀行付款";
+"adyen.payByBankAISDD.more" = "+ 更多";
 "adyen.upi.modeSelection" = "您想如何使用 UPI？";
 "adyen.UPIVpa.validationMessage" = "輸入正確的虛擬付款地址";
 "adyen.UPIQrcode.generationMessage" = "產生可以下載或擷取螢幕畫面的 QR 代碼，然後將其上傳到 UPI 應用程式以完成付款。";

@@ -172,6 +172,10 @@
 "adyen.paybybank.subtitle" = "Vašim upitom za pretraživanje nije pronađena nijedna banka…";
 "adyen.paybybank.title" = "Nema rezultata za";
 "adyen.search.placeholder" = "Traži…";
+"adyen.payByBankAISDD.disclaimer.header" = "Koristite Pay by Bank za trenutačno plaćanje s bilo kojeg bankovnog računa.";
+"adyen.payByBankAISDD.disclaimer.body" = "Povezivanjem svog bankovnog računa autorizirate zaduženja na svoj račun za bilo koji iznos koji se duguje za upotrebu naših usluga i/ili kupnju naših proizvoda, sve dok se autorizacija ne opozove.";
+"adyen.payByBankAISDD.submit" = "Nastavite s plaćanjem putem banke";
+"adyen.payByBankAISDD.more" = "+ više";
 "adyen.upi.modeSelection" = "Kako biste željeli koristiti UPI?";
 "adyen.UPIVpa.validationMessage" = "Upišite točnu adresu za virtualno plaćanje";
 "adyen.UPIQrcode.generationMessage" = "Generirajte kôd QR koji možete preuzeti ili napravite snimku zaslona i prenesite ga u aplikaciju UPI kako biste završili plaćanje.";

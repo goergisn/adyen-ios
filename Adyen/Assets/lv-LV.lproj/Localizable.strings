@@ -172,6 +172,10 @@
 "adyen.paybybank.subtitle" = "Ar jūsu meklēšanas vaicājumu netika atrasta neviena banka…";
 "adyen.paybybank.title" = "Nav rezultātu par";
 "adyen.search.placeholder" = "Meklēšana…";
+"adyen.payByBankAISDD.disclaimer.header" = "Izmantojiet Pay by Bank pakalpojumu, lai nekavējoties norēķinātos no jebkura bankas konta.";
+"adyen.payByBankAISDD.disclaimer.body" = "Pievienojot bankas kontu, jūs atļaujat debetēt no sava konta jebkuru summu, kas maksājama par mūsu pakalpojumu izmantošanu un/vai mūsu produktu iegādi, līdz brīdim, kad šī atļauja tiek atsaukta.";
+"adyen.payByBankAISDD.submit" = "Turpināt maksāt ar bankas starpniecību";
+"adyen.payByBankAISDD.more" = "+ vairāk";
 "adyen.upi.modeSelection" = "Kā vēlaties izmantot UPI?";
 "adyen.UPIVpa.validationMessage" = "Ievadiet pareizu virtuālo maksājumu adresi";
 "adyen.UPIQrcode.generationMessage" = "Lai pabeigtu maksājumu, ģenerējiet QR kodu, kuru varat lejupielādēt vai saglabāt kā ekrānuzņēmumu, un augšupielādējiet to UPI lietotnē.";

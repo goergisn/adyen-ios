@@ -172,6 +172,10 @@
 "adyen.paybybank.subtitle" = "この検索クエリでは銀行は見つかりませんでした…";
 "adyen.paybybank.title" = "以下の結果はありません：";
 "adyen.search.placeholder" = "検索…";
+"adyen.payByBankAISDD.disclaimer.header" = "Pay by Bankを使用すると、どの銀行口座からでも即座に支払いができます。";
+"adyen.payByBankAISDD.disclaimer.body" = "銀行口座を接続することで、お客様は、この承認が取り消されるまで、当社のサービスの利用および/または当社製品の購入のために支払うべき金額をお客様の口座から引き落とすことを承認したことになります。";
+"adyen.payByBankAISDD.submit" = "Pay by Bankに進む";
+"adyen.payByBankAISDD.more" = "+ 詳細を確認";
 "adyen.upi.modeSelection" = "UPIをどのように使用しますか？";
 "adyen.UPIVpa.validationMessage" = "正しい仮想支払アドレスを入力してください";
 "adyen.UPIQrcode.generationMessage" = "ダウンロードまたはスクリーンショットで取得できるQRコードを生成し、UPIアプリにアップロードして支払いを完了します。";

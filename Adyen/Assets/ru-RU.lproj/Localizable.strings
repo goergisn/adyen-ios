@@ -168,6 +168,10 @@
 "adyen.paybybank.subtitle" = "По вашему поисковому запросу банк не найден…";
 "adyen.paybybank.title" = "Ничего не найдено по запросу";
 "adyen.search.placeholder" = "Поиск…";
+"adyen.payByBankAISDD.disclaimer.header" = "Для моментальной оплаты с любого банковского счета воспользуйтесь приложением Pay by Bank.";
+"adyen.payByBankAISDD.disclaimer.body" = "Привязывая банковский счет, вы тем самым даете разрешение на списание с него средств за пользование нашими услугами и/или покупку нашей продукции. Данное разрешение продействует до тех пор, пока оно не будет отозвано.";
+"adyen.payByBankAISDD.submit" = "Продолжить оплату через банк";
+"adyen.payByBankAISDD.more" = "+ иное";
 "adyen.upi.modeSelection" = "Как вы хотите использовать UPI?";
 "adyen.UPIVpa.validationMessage" = "Введите правильный адрес виртуальных платежей";
 "adyen.UPIQrcode.generationMessage" = "Сгенерируйте загружаемый QR-код или снимок экрана и отправьте его в приложение UPI, чтобы завершить оплату.";

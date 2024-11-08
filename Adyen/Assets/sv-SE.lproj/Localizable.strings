@@ -168,6 +168,10 @@
 "adyen.paybybank.subtitle" = "Inga banker hittades med din sökfråga…";
 "adyen.paybybank.title" = "Inga resultat för";
 "adyen.search.placeholder" = "Sök efter…";
+"adyen.payByBankAISDD.disclaimer.header" = "Använd Pay by Bank och betala direkt från vilket bankkonto som helst.";
+"adyen.payByBankAISDD.disclaimer.body" = "Genom att ansluta ditt bankkonto godkänner du att ditt konto debiteras eventuella belopp som du är skyldig för användning av våra tjänster och/eller köp av våra produkter, tills detta godkännande återkallas.";
+"adyen.payByBankAISDD.submit" = "Fortsätt att betala via bank";
+"adyen.payByBankAISDD.more" = "+ mer";
 "adyen.upi.modeSelection" = "Hur vill du använda UPI?";
 "adyen.UPIVpa.validationMessage" = "Ange en korrekt virtuell betalningsadress";
 "adyen.UPIQrcode.generationMessage" = "Generera QR-koden, som du kan ladda ner eller ta en skärmdump av, och ladda upp den i UPI-appen för att slutföra betalningen.";

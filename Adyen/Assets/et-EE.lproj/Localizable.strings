@@ -172,6 +172,10 @@
 "adyen.paybybank.subtitle" = "Teie otsinguga ei leitud ühtegi panka …";
 "adyen.paybybank.title" = "Tulemusi pole:";
 "adyen.search.placeholder" = "Otsi …";
+"adyen.payByBankAISDD.disclaimer.header" = "Kasutage pangamakset, et maksta koheselt mis tahes pangakontoga.";
+"adyen.payByBankAISDD.disclaimer.body" = "Pangakonto sidumisega annate loa debiteerida oma kontolt meie teenuste kasutamise ja/või meie toodete ostmise eest mis tahes võlgnetavad summad kuni selle loa tühistamiseni.";
+"adyen.payByBankAISDD.submit" = "Jätkake pangaga maksmist";
+"adyen.payByBankAISDD.more" = "+ veel";
 "adyen.upi.modeSelection" = "Kuidas soovite UPI-d kasutada?";
 "adyen.UPIVpa.validationMessage" = "Sisestage õige virtuaalne makseaadress";
 "adyen.UPIQrcode.generationMessage" = "Looge QR-kood, mille saate alla laadida või teha sellest kuvatõmmise ja laadida selle UPI rakendusse, et makse lõpule viia.";

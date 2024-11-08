@@ -172,6 +172,10 @@
 "adyen.paybybank.subtitle" = "Non sono state trovate banche corrispondenti alla tua query di ricerca…";
 "adyen.paybybank.title" = "Nessun risultato per";
 "adyen.search.placeholder" = "Cerca…";
+"adyen.payByBankAISDD.disclaimer.header" = "Utilizza Pay by Bank per pagare istantaneamente da qualsiasi conto bancario.";
+"adyen.payByBankAISDD.disclaimer.body" = "Collegando il tuo conto bancario, autorizzi l'addebito su di esso di qualsiasi importo dovuto per l'utilizzo dei nostri servizi e/o l'acquisto dei nostri prodotti, fino alla revoca di tale autorizzazione.";
+"adyen.payByBankAISDD.submit" = "Continua su Pay by Bank";
+"adyen.payByBankAISDD.more" = "+ altro";
 "adyen.upi.modeSelection" = "Come vuoi utilizzare UPI?";
 "adyen.UPIVpa.validationMessage" = "Inserisci un indirizzo di pagamento virtuale corretto";
 "adyen.UPIQrcode.generationMessage" = "Per completare il pagamento, genera il codice QR scaricabile, oppure fai uno screenshot del codice e provvedi a caricarlo nell'app UPI.";

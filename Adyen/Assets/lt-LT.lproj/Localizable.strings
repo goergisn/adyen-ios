@@ -172,6 +172,10 @@
 "adyen.paybybank.subtitle" = "Pagal jūsų paieškos užklausą bankų nerasta…";
 "adyen.paybybank.title" = "Rezultatų nėra";
 "adyen.search.placeholder" = "Ieškoti…";
+"adyen.payByBankAISDD.disclaimer.header" = "Naudokitės „Pay by Bank“ ir akimirksniu atsiskaitykite iš bet kurios banko sąskaitos.";
+"adyen.payByBankAISDD.disclaimer.body" = "Prijungdami savo banko sąskaitą sutinkate, kad iš jos būtų nurašomos visos mokėtinos sumos už naudojimąsi mūsų paslaugomis ir (arba) už mūsų produktų pirkimą, kol šis leidimas bus atšauktas.";
+"adyen.payByBankAISDD.submit" = "Toliau eiti į „Pay by Bank“";
+"adyen.payByBankAISDD.more" = "+ daugiau";
 "adyen.upi.modeSelection" = "Kaip norėtumėte naudoti UPI?";
 "adyen.UPIVpa.validationMessage" = "Įveskite teisingą virtualų mokėjimo adresą";
 "adyen.UPIQrcode.generationMessage" = "Sugeneruokite QR kodą, kurį galite atsisiųsti arba padaryti ekrano kopiją ir įkelti į UPI programą, kad užbaigtumėte mokėjimą.";

@@ -172,6 +172,10 @@
 "adyen.paybybank.subtitle" = "Geen banken voor uw zoekopdracht…";
 "adyen.paybybank.title" = "Geen resultaten voor";
 "adyen.search.placeholder" = "Zoeken…";
+"adyen.payByBankAISDD.disclaimer.header" = "Gebruik Pay by Bank om direct vanaf elke bankrekening te betalen.";
+"adyen.payByBankAISDD.disclaimer.body" = "Door uw bankrekening te koppelen, machtigt u afschrijvingen van uw rekening voor elk bedrag dat u verschuldigd bent voor het gebruik van onze diensten en/of de aankoop van onze producten, totdat deze machtiging wordt ingetrokken.";
+"adyen.payByBankAISDD.submit" = "Doorgaan met betalen via de bank";
+"adyen.payByBankAISDD.more" = "+ meer";
 "adyen.upi.modeSelection" = "Hoe wilt u UPI gebruiken?";
 "adyen.UPIVpa.validationMessage" = "Voer een correct virtueel betalingsadres in";
 "adyen.UPIQrcode.generationMessage" = "Genereer de QR-code. U kunt deze downloaden of er een schermafbeelding van maken en deze uploaden naar de UPI-app om de betaling te voltooien.";
