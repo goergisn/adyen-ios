@@ -12,6 +12,9 @@ public enum AnalyticsConstants {
     /// A constant to pass into the payment data object in the case where fetching the checkout attempt Id fails.
     public static let fetchCheckoutAttemptIdFailed = "fetch-checkoutAttemptId-failed"
     
+    /// A constant to pass into the payment data object in the case where the checkout attempt id is never fetched (e.g., instant components).
+    public static let checkoutAttemptIdNotFetched = "checkoutAttemptId-not-fetched"
+    
     public enum ValidationErrorCodes {
         
         public static let cardNumberEmpty = 900
