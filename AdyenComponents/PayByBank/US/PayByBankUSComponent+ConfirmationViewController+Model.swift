@@ -5,6 +5,7 @@
 //
 
 import Foundation
+import UIKit
 @_spi(AdyenInternal) import Adyen
 
 extension PayByBankUSComponent.ConfirmationViewController {
