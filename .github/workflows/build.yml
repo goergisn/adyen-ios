@@ -5,6 +5,7 @@ on:
   push:
     branches:
     - develop
+    - release/**
     
 jobs:
   tests:
@@ -14,6 +15,22 @@ jobs:
       fail-fast: false
       matrix:
         include:
+        
+        - version: '17.2'
+          runtime: 'iOS-17-2'
+          device: 'iPhone 15'
+          displayname: 'iPhone-15'
+          os: 'macos-14-xlarge'
+          xcode_version: '15.1'
+          needs_custom_sim: false # Takes the shipped simulator that comes with Xcode 15
+          
+        - version: '17.2'
+          runtime: 'iOS-17-2'
+          device: 'iPad Air (5th generation)'
+          displayname: 'iPad-Air-5'
+          os: 'macos-14-xlarge'
+          xcode_version: '15.1'
+          needs_custom_sim: false # Takes the shipped simulator that comes with Xcode 15
         
         - version: '16.4'
           runtime: 'iOS-16-4'
