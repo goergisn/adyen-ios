@@ -74,7 +74,7 @@ class PaymentMethodTests: XCTestCase {
                 givexGiftCard,
                 mealVoucherSodexo,
                 bizum,
-                boleto,
+                boletoBancarioSantander,
                 affirm,
                 atome,
                 upi,
@@ -1060,7 +1060,7 @@ class PaymentMethodTests: XCTestCase {
     // MARK: - Boleto
     
     func testDecodingBoletoPaymentMethod() throws {
-        let paymentMethod = try AdyenCoder.decode(boleto) as BoletoPaymentMethod
+        let paymentMethod = try AdyenCoder.decode(boletoBancarioSantander) as BoletoPaymentMethod
         XCTAssertEqual(paymentMethod.type.rawValue, "boletobancario_santander")
         XCTAssertEqual(paymentMethod.name, "Boleto Bancario")
         XCTAssertEqual(paymentMethod.displayInformation(using: nil).title, "Boleto Bancario")
