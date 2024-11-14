@@ -98,10 +98,7 @@ internal final class ComponentsViewController: UIViewController {
                     selectionHandler: presentInstantPaymentComponent
                 )
             ],
-            [ComponentsItem(title: "Apple Pay", selectionHandler: presentApplePayComponent)],
-            [
-                ComponentsItem(title: "Configurable Pay Button", selectionHandler: presentCustomComponentView)
-            ]
+            [ComponentsItem(title: "Apple Pay", selectionHandler: presentApplePayComponent)]
         ]
         
         if #available(iOS 13.0.0, *) {
@@ -164,14 +161,6 @@ internal final class ComponentsViewController: UIViewController {
             start(applePayComponentAdvancedFlowExample)
         }
     }
-
-    internal func presentCustomComponentView() {
-        let assembler = CustomComponentAssembler()
-        let customComponentView = assembler.resolveCustomComponentView()
-        let navigationController = UINavigationController(rootViewController: customComponentView)
-        present(viewController: navigationController, completion: nil)
-    }
-
 }
 
 // MARK: - Presenter
