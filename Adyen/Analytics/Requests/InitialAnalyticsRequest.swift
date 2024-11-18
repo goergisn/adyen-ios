@@ -47,7 +47,7 @@ internal struct InitialAnalyticsRequest: APIRequest {
     private let containerWidth: Int?
     private let paymentMethods: [String]
     private let component: String
-    private let level: String
+    internal let level: String
     internal let amount: Amount?
     internal let sessionId: String?
 

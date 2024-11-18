@@ -102,6 +102,7 @@ class AnalyticsProviderTests: XCTestCase {
                 XCTAssertNil(initialAnalyticsdRequest.amount)
                 XCTAssertEqual(initialAnalyticsdRequest.version, adyenSdkVersion)
                 XCTAssertEqual(initialAnalyticsdRequest.platform, "iOS")
+                XCTAssertEqual(initialAnalyticsdRequest.level, "all")
                 analyticsExpectation.fulfill()
             }
         }
