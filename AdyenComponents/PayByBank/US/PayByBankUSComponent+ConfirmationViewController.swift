@@ -83,7 +83,7 @@ extension PayByBankUSComponent.ConfirmationViewController {
         return titleLabel
     }
     
-    @objc private func submitTapped() {
+    @objc internal func submitTapped() {
         submitButton.showsActivityIndicator = true
         model.continueHandler()
     }

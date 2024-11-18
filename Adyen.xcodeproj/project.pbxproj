@@ -168,6 +168,7 @@
 		813EF9EC2A5FE48A00C65D15 /* FormPickerSearchViewController+EmptyView+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813EF9EB2A5FE48A00C65D15 /* FormPickerSearchViewController+EmptyView+Style.swift */; };
 		813EF9EE2A5FE8D900C65D15 /* FormPickerSearchViewController+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813EF9ED2A5FE8D900C65D15 /* FormPickerSearchViewController+Style.swift */; };
 		813EF9F02A6551C300C65D15 /* ViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813EF9EF2A6551C300C65D15 /* ViewControllerPresenter.swift */; };
+		813F21C82CEB64EB0072D193 /* PayByBankUSComponentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813F21C72CEB64E40072D193 /* PayByBankUSComponentTests.swift */; };
 		814044312B62BDBB00EB7FBA /* SecuredViewControllerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814044302B62BDBB00EB7FBA /* SecuredViewControllerUITests.swift */; };
 		8140A3762A3327B500896403 /* AdyenComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9175E55259393E800D653BE /* AdyenComponents.framework */; };
 		814276622A7145F50081E896 /* AddressInputFormViewController+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814276612A7145F50081E896 /* AddressInputFormViewController+ViewModel.swift */; };
@@ -1634,6 +1635,7 @@
 		813EF9EB2A5FE48A00C65D15 /* FormPickerSearchViewController+EmptyView+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FormPickerSearchViewController+EmptyView+Style.swift"; sourceTree = "<group>"; };
 		813EF9ED2A5FE8D900C65D15 /* FormPickerSearchViewController+Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FormPickerSearchViewController+Style.swift"; sourceTree = "<group>"; };
 		813EF9EF2A6551C300C65D15 /* ViewControllerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerPresenter.swift; sourceTree = "<group>"; };
+		813F21C72CEB64E40072D193 /* PayByBankUSComponentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayByBankUSComponentTests.swift; sourceTree = "<group>"; };
 		814044302B62BDBB00EB7FBA /* SecuredViewControllerUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecuredViewControllerUITests.swift; sourceTree = "<group>"; };
 		814276612A7145F50081E896 /* AddressInputFormViewController+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddressInputFormViewController+ViewModel.swift"; sourceTree = "<group>"; };
 		8149CCB52B0B855F007235E2 /* ThreeDS2PlusDACoreActionHandlerTests+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ThreeDS2PlusDACoreActionHandlerTests+Constants.swift"; sourceTree = "<group>"; };
@@ -4553,6 +4555,7 @@
 		E97B9717229D533B00505476 /* Components Tests */ = {
 			isa = PBXGroup;
 			children = (
+				813F21C72CEB64E40072D193 /* PayByBankUSComponentTests.swift */,
 				81DA708F2BDA60F6006CE5D5 /* Twint */,
 				A020EC5829ED33CF0050B2FE /* Cash App Pay */,
 				0067E73E296C15F6005B8D76 /* UPIComponent */,
@@ -7307,6 +7310,7 @@
 				00EACBC9288013AE0082B360 /* XCTestCase+Coder.swift in Sources */,
 				E7975F982880421600A12C40 /* XCTestCase+Result.swift in Sources */,
 				81B505792A7BE209009B4CB3 /* UIBarButtonItem+XCTest.swift in Sources */,
+				813F21C82CEB64EB0072D193 /* PayByBankUSComponentTests.swift in Sources */,
 				00F621C527F1AF5A00C04097 /* AtomeComponentTests.swift in Sources */,
 				E73C567F25EFCC4200B57758 /* IssuerListComponentTests.swift in Sources */,
 				E9E3DAC6221ECF6300697074 /* CardNumberValidatorTests.swift in Sources */,
