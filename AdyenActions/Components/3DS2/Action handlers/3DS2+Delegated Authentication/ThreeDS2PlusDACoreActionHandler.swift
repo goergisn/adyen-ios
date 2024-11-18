@@ -19,7 +19,6 @@ internal typealias VoidHandler = () -> Void
     @available(iOS 16.0, *)
     // swiftlint:disable:next type_body_length
     internal class ThreeDS2PlusDACoreActionHandler: ThreeDS2CoreActionHandler {
-        
         internal var delegatedAuthenticationState: DelegatedAuthenticationState = .init()
         
         internal struct DelegatedAuthenticationState {
@@ -31,6 +30,10 @@ internal typealias VoidHandler = () -> Void
         private let deviceSupportCheckerService: AdyenAuthentication.DeviceSupportCheckerProtocol
         private var presenter: ThreeDS2PlusDAScreenPresenterProtocol
         
+        private enum Constants {
+            static let consecutiveCancellationTolerance = 2
+        }
+
         /// Initializes the 3D Secure 2 action handler.
         ///
         /// - Parameter context: The context object for this component.
@@ -266,9 +269,22 @@ internal typealias VoidHandler = () -> Void
                 },
                 failedAuthenticationHandler: { [weak self] error in
                     guard let self else { return }
-                    self.presenter.showAuthenticationError(component: self) {
-                        completion(.failure(.authenticationServiceFailed(underlyingError: error)))
+                    
+                    if case let AdyenAuthenticationError.consecutiveCancellationOnApproval(count) = error,
+                       count >= Constants.consecutiveCancellationTolerance {
+                        try? self.service(cardNumber: nil).reset()
                     }
+                    
+                    self.presenter.showAuthenticationError(
+                        component: self,
+                        handler: {
+                            completion(.failure(.authenticationServiceFailed(underlyingError: error)))
+                        },
+                        troubleshootingHandler: { [weak self] in
+                            try? self?.service(cardNumber: cardNumber).reset()
+                            completion(.failure(.authenticationServiceFailed(underlyingError: error)))
+                        }
+                    )
                 }
             )
         }
@@ -364,7 +380,8 @@ internal typealias VoidHandler = () -> Void
             return AdyenAuthentication.AuthenticationService(
                 passKeyConfiguration: .init(
                     relyingPartyIdentifier: delegatedAuthenticationConfiguration.relyingPartyIdentifier,
-                    displayName: cardNumber ?? Bundle.main.displayName
+                    displayName: cardNumber ?? Bundle.main.displayName,
+                    consecutiveApprovalCancellationsLimit: Constants.consecutiveCancellationTolerance
                 )
             )
 

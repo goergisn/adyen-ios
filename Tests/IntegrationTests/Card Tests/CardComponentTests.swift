@@ -446,13 +446,12 @@ class CardComponentTests: XCTestCase {
             configuration: configuration
         )
 
-        setupRootViewController(component.viewController)
+        presentOnRoot(component.viewController)
 
         let switchView: UISwitch = try XCTUnwrap(component.viewController.view.findView(with: "AdyenCard.CardComponent.storeDetailsItem.switch"))
         let securityCodeItemView: FormTextItemView<FormCardSecurityCodeItem> = try XCTUnwrap(component.viewController.view.findView(with: "AdyenCard.CardComponent.securityCodeItem"))
 
         wait(until: switchView, at: \.onTintColor, is: tintColor)
-
         wait(until: securityCodeItemView, at: \.titleLabel.textColor, is: titleColor)
         
         try withoutAnimation {
@@ -2342,6 +2341,58 @@ class CardComponentTests: XCTestCase {
         
         wait(until: expiryDateItem, at: \.expiryYear, is: "2030")
         wait(until: expiryDateItem, at: \.expiryMonth, is: "03")
+    }
+
+    func testValidateGivenValidInputShouldReturnFormViewControllerValidateResult() throws {
+        // Given
+        var configuration = CardComponent.Configuration()
+        configuration.billingAddress.mode = .none
+        let sut = CardComponent(
+            paymentMethod: method,
+            context: Dummy.context(with: nil),
+            configuration: configuration,
+            publicKeyProvider: PublicKeyProviderMock(),
+            binProvider: BinInfoProviderMock()
+        )
+
+        setupRootViewController(sut.viewController)
+
+        fillCard(on: sut.viewController.view, with: Dummy.visaCard)
+
+        let cardViewController = try XCTUnwrap((sut.viewController as? SecuredViewController<CardViewController>)?.childViewController)
+        let expectedResult = cardViewController.validate()
+
+        // When
+        let validationResult = sut.validate()
+
+        // Then
+        XCTAssertTrue(validationResult)
+        XCTAssertEqual(expectedResult, validationResult)
+    }
+
+    func testValidateGivenInvalidInputShouldReturnFormViewControllerValidateResult() throws {
+        // Given
+        var configuration = CardComponent.Configuration()
+        configuration.billingAddress.mode = .none
+        let sut = CardComponent(
+            paymentMethod: method,
+            context: Dummy.context(with: nil),
+            configuration: configuration,
+            publicKeyProvider: PublicKeyProviderMock(),
+            binProvider: BinInfoProviderMock()
+        )
+
+        setupRootViewController(sut.viewController)
+
+        let cardViewController = try XCTUnwrap((sut.viewController as? SecuredViewController<CardViewController>)?.childViewController)
+        let expectedResult = cardViewController.validate()
+
+        // When
+        let validationResult = sut.validate()
+
+        // Then
+        XCTAssertFalse(validationResult)
+        XCTAssertEqual(expectedResult, validationResult)
     }
 
     // MARK: - Private
