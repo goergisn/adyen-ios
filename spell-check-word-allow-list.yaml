@@ -39,6 +39,7 @@ whiteList:
   - qiwi
   - qiwiwallet
   - boletobancario
+  - boletoBancarioItau
   - applepay
   - wechatpay
   - mbway
