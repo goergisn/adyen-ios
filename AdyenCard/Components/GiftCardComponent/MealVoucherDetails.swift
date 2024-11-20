@@ -16,6 +16,9 @@ public struct MealVoucherDetails: PartialPaymentMethodDetails {
     @_spi(AdyenInternal)
     public var checkoutAttemptId: String?
 
+    /// The brand of a payment method .
+    public let brand: PaymentMethodType
+
     /// The payment method type.
     public let type: PaymentMethodType
 
@@ -39,8 +42,9 @@ public struct MealVoucherDetails: PartialPaymentMethodDetails {
     public init(paymentMethod: MealVoucherPaymentMethod, encryptedCard: EncryptedCard) throws {
         guard let number = encryptedCard.number,
               let securityCode = encryptedCard.securityCode else { throw GiftCardComponent.Error.cardEncryptionFailed }
-        
-        self.type = paymentMethod.type
+
+        self.type = .mealVoucher
+        self.brand = paymentMethod.type
         self.encryptedCardNumber = number
         self.encryptedSecurityCode = securityCode
         self.encryptedExpiryYear = encryptedCard.expiryYear

@@ -59,6 +59,7 @@ public enum PaymentMethodType: RawRepresentable, Hashable, Codable {
     case mealVoucherNatixis
     case mealVoucherGroupeUp
     case mealVoucherSodexo
+    case mealVoucher
     case upi
     case cashAppPay
     case twint
@@ -203,6 +204,7 @@ public enum PaymentMethodType: RawRepresentable, Hashable, Codable {
         case .mealVoucherGroupeUp: return "mealVoucher_FR_groupeup"
         case .mealVoucherNatixis: return "mealVoucher_FR_natixis"
         case .mealVoucherSodexo: return "mealVoucher_FR_sodexo"
+        case .mealVoucher: return "mealVoucher_FR"
         case .upi: return "upi"
         case .upiQr: return "upi_qr"
         case .upiIntent: return "upi_intent"
@@ -277,6 +279,7 @@ extension PaymentMethodType {
         case .mealVoucherGroupeUp: return "meal voucher groupe-up"
         case .mealVoucherNatixis: return "meal voucher natixis"
         case .mealVoucherSodexo: return "meal voucher sodexo"
+        case .mealVoucher: return "meal voucher"
         case .upi: return "UPI"
         case .upiQr: return "UPI QR"
         case .upiIntent: return "UPI Intent"
