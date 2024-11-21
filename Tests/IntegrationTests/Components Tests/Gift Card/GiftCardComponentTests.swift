@@ -94,7 +94,6 @@ class GiftCardComponentTests: XCTestCase {
         
         // When
         setupRootViewController(sut.viewController)
-        wait(for: .milliseconds(300))
 
         // Then
         XCTAssertNil(expiryDateItemView, "should not have expiry date field for gift card")
@@ -115,7 +114,6 @@ class GiftCardComponentTests: XCTestCase {
         
         // When
         setupRootViewController(sut.viewController)
-        wait(for: .milliseconds(300))
 
         // Then
         XCTAssertNotNil(expiryDateItemView, "should have expiry date field for meal voucher")
@@ -136,7 +134,6 @@ class GiftCardComponentTests: XCTestCase {
 
         // When
         setupRootViewController(sut.viewController)
-        wait(for: .milliseconds(300))
         populate(textItemView: numberItemView!, with: "1234 1234 1234 1234")
         populate(textItemView: securityCodeItemView!, with: "123")
         populate(textItemView: expiryDateItemView!, with: "1233")
@@ -186,8 +183,6 @@ class GiftCardComponentTests: XCTestCase {
 
         setupRootViewController(sut.viewController)
 
-        wait(for: .milliseconds(300))
-
         XCTAssertTrue(errorView!.isHidden)
 
         populate(cardNumber: "60643650100000000000", pin: "73737")
@@ -205,8 +200,6 @@ class GiftCardComponentTests: XCTestCase {
     func testCheckBalanceCardNumberFormatting() throws {
 
         setupRootViewController(sut.viewController)
-
-        wait(for: .milliseconds(300))
 
         XCTAssertTrue(errorView!.isHidden)
 
@@ -240,8 +233,6 @@ class GiftCardComponentTests: XCTestCase {
         }
 
         setupRootViewController(sut.viewController)
-
-        wait(for: .milliseconds(300))
 
         XCTAssertTrue(errorView!.isHidden)
 
@@ -279,8 +270,6 @@ class GiftCardComponentTests: XCTestCase {
 
         setupRootViewController(sut.viewController)
 
-        wait(for: .milliseconds(300))
-
         XCTAssertTrue(errorView!.isHidden)
 
         populate(cardNumber: "60643650100000000000", pin: "73737")
@@ -316,8 +305,6 @@ class GiftCardComponentTests: XCTestCase {
         }
 
         setupRootViewController(sut.viewController)
-
-        wait(for: .milliseconds(300))
 
         XCTAssertTrue(errorView!.isHidden)
 
@@ -368,8 +355,6 @@ class GiftCardComponentTests: XCTestCase {
 
         setupRootViewController(sut.viewController)
 
-        wait(for: .milliseconds(300))
-
         XCTAssertTrue(errorView!.isHidden)
 
         populate(cardNumber: "60643650100000000000", pin: "73737")
@@ -419,8 +404,6 @@ class GiftCardComponentTests: XCTestCase {
         }
 
         setupRootViewController(sut.viewController)
-
-        wait(for: .milliseconds(300))
 
         XCTAssertTrue(errorView!.isHidden)
 
@@ -475,8 +458,6 @@ class GiftCardComponentTests: XCTestCase {
 
         setupRootViewController(sut.viewController)
 
-        wait(for: .milliseconds(300))
-
         XCTAssertTrue(errorView!.isHidden)
 
         populate(cardNumber: "60643650100000000000", pin: "73737")
@@ -530,8 +511,6 @@ class GiftCardComponentTests: XCTestCase {
 
         setupRootViewController(sut.viewController)
 
-        wait(for: .milliseconds(300))
-
         XCTAssertTrue(errorView!.isHidden)
 
         populate(cardNumber: "60643650100000000000", pin: "73737")
@@ -583,8 +562,6 @@ class GiftCardComponentTests: XCTestCase {
         }
 
         setupRootViewController(sut.viewController)
-
-        wait(for: .milliseconds(300))
 
         XCTAssertTrue(errorView!.isHidden)
 
