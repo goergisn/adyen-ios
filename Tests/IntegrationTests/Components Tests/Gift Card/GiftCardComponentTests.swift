@@ -148,8 +148,8 @@ class GiftCardComponentTests: XCTestCase {
         partialPaymentDelegate.onCheckBalance = { data, component in
             XCTAssertTrue(data.paymentMethod is MealVoucherDetails)
             let paymentMethod = data.paymentMethod as! MealVoucherDetails
-            XCTAssertEqual(paymentMethod.type, .mealVoucher)
-            XCTAssertEqual(paymentMethod.brand, .mealVoucherSodexo)
+            XCTAssertEqual(paymentMethod.type.rawValue, "mealVoucher_FR")
+            XCTAssertEqual(paymentMethod.brand.rawValue, "mealVoucher_FR_sodexo")
             XCTAssertGreaterThan(paymentMethod.encryptedCardNumber.count, 0)
             XCTAssertGreaterThan(paymentMethod.encryptedExpiryYear!.count, 0)
             XCTAssertGreaterThan(paymentMethod.encryptedExpiryMonth!.count, 0)

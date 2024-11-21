@@ -20,7 +20,7 @@ public struct MealVoucherDetails: PartialPaymentMethodDetails {
     public let brand: PaymentMethodType
 
     /// The payment method type.
-    public let type: PaymentMethodType
+    public let type: PaymentMethodType = mealVoucherPaymentMethodType
 
     /// The encrypted card number.
     public let encryptedCardNumber: String
@@ -43,7 +43,6 @@ public struct MealVoucherDetails: PartialPaymentMethodDetails {
         guard let number = encryptedCard.number,
               let securityCode = encryptedCard.securityCode else { throw GiftCardComponent.Error.cardEncryptionFailed }
 
-        self.type = .mealVoucher
         self.brand = paymentMethod.type
         self.encryptedCardNumber = number
         self.encryptedSecurityCode = securityCode
