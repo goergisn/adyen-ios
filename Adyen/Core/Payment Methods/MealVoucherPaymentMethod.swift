@@ -32,6 +32,3 @@ public struct MealVoucherPaymentMethod: PartialPaymentMethod {
     }
 
 }
-
-/// Payment method type for internal use
-public let mealVoucherPaymentMethodType = PaymentMethodType.other("mealVoucher_FR")

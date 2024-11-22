@@ -20,7 +20,7 @@ public struct MealVoucherDetails: PartialPaymentMethodDetails {
     public let brand: PaymentMethodType
 
     /// The payment method type.
-    public let type: PaymentMethodType = mealVoucherPaymentMethodType
+    public let type: PaymentMethodType = .mealVoucher
 
     /// The encrypted card number.
     public let encryptedCardNumber: String
@@ -49,4 +49,8 @@ public struct MealVoucherDetails: PartialPaymentMethodDetails {
         self.encryptedExpiryYear = encryptedCard.expiryYear
         self.encryptedExpiryMonth = encryptedCard.expiryMonth
     }
+}
+
+extension PaymentMethodType {
+    fileprivate static var mealVoucher: PaymentMethodType { PaymentMethodType.other("mealVoucher_FR") }
 }
