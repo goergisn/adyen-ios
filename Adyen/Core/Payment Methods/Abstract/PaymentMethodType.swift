@@ -42,7 +42,7 @@ public enum PaymentMethodType: RawRepresentable, Hashable, Codable {
         *,
         deprecated,
         renamed: "boletoBancarioSantander",
-        message: "Use 'boletoBancarioSantander' instead."
+        message: "Use 'boletoBancarioSantander' instead. Consider 'boletoBancario' as the default payment method for Boleto Bancario."
     )
     case boleto
     case boletoBancarioSantander
