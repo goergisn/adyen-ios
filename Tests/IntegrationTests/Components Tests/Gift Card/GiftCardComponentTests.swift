@@ -93,7 +93,7 @@ class GiftCardComponentTests: XCTestCase {
         )
         
         // When
-        setupRootViewController(sut.viewController)
+        sut.viewController.loadViewIfNeeded()
 
         // Then
         XCTAssertNil(expiryDateItemView, "should not have expiry date field for gift card")
@@ -113,7 +113,7 @@ class GiftCardComponentTests: XCTestCase {
         )
         
         // When
-        setupRootViewController(sut.viewController)
+        sut.viewController.loadViewIfNeeded()
 
         // Then
         XCTAssertNotNil(expiryDateItemView, "should have expiry date field for meal voucher")
@@ -133,7 +133,8 @@ class GiftCardComponentTests: XCTestCase {
         )
 
         // When
-        setupRootViewController(sut.viewController)
+        sut.viewController.loadViewIfNeeded()
+
         populate(textItemView: numberItemView!, with: "1234 1234 1234 1234")
         populate(textItemView: securityCodeItemView!, with: "123")
         populate(textItemView: expiryDateItemView!, with: "1233")
@@ -181,7 +182,7 @@ class GiftCardComponentTests: XCTestCase {
             onCheckBalanceExpectation.fulfill()
         }
 
-        setupRootViewController(sut.viewController)
+        sut.viewController.loadViewIfNeeded()
 
         XCTAssertTrue(errorView!.isHidden)
 
@@ -199,7 +200,7 @@ class GiftCardComponentTests: XCTestCase {
 
     func testCheckBalanceCardNumberFormatting() throws {
 
-        setupRootViewController(sut.viewController)
+        sut.viewController.loadViewIfNeeded()
 
         XCTAssertTrue(errorView!.isHidden)
 
@@ -232,7 +233,7 @@ class GiftCardComponentTests: XCTestCase {
             onCheckBalanceExpectation.fulfill()
         }
 
-        setupRootViewController(sut.viewController)
+        sut.viewController.loadViewIfNeeded()
 
         XCTAssertTrue(errorView!.isHidden)
 
@@ -268,7 +269,7 @@ class GiftCardComponentTests: XCTestCase {
             onCheckBalanceExpectation.fulfill()
         }
 
-        setupRootViewController(sut.viewController)
+        sut.viewController.loadViewIfNeeded()
 
         XCTAssertTrue(errorView!.isHidden)
 
@@ -304,7 +305,7 @@ class GiftCardComponentTests: XCTestCase {
             onCheckBalanceExpectation.fulfill()
         }
 
-        setupRootViewController(sut.viewController)
+        sut.viewController.loadViewIfNeeded()
 
         XCTAssertTrue(errorView!.isHidden)
 
@@ -353,7 +354,7 @@ class GiftCardComponentTests: XCTestCase {
             onSubmitExpectation.fulfill()
         }
 
-        setupRootViewController(sut.viewController)
+        sut.viewController.loadViewIfNeeded()
 
         XCTAssertTrue(errorView!.isHidden)
 
@@ -403,7 +404,7 @@ class GiftCardComponentTests: XCTestCase {
             onShowConfirmationExpectation.fulfill()
         }
 
-        setupRootViewController(sut.viewController)
+        sut.viewController.loadViewIfNeeded()
 
         XCTAssertTrue(errorView!.isHidden)
 
@@ -456,7 +457,7 @@ class GiftCardComponentTests: XCTestCase {
             XCTFail("readyToSubmitPaymentComponentDelegate.onShowConfirmation must not be called")
         }
 
-        setupRootViewController(sut.viewController)
+        sut.viewController.loadViewIfNeeded()
 
         XCTAssertTrue(errorView!.isHidden)
 
@@ -509,7 +510,7 @@ class GiftCardComponentTests: XCTestCase {
             XCTFail("readyToSubmitPaymentComponentDelegate.onShowConfirmation must not be called")
         }
 
-        setupRootViewController(sut.viewController)
+        sut.viewController.loadViewIfNeeded()
 
         XCTAssertTrue(errorView!.isHidden)
 
@@ -561,7 +562,7 @@ class GiftCardComponentTests: XCTestCase {
             XCTFail("readyToSubmitPaymentComponentDelegate.onShowConfirmation must not be called")
         }
 
-        setupRootViewController(sut.viewController)
+        sut.viewController.loadViewIfNeeded()
 
         XCTAssertTrue(errorView!.isHidden)
 
