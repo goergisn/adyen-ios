@@ -16,7 +16,7 @@ public struct MealVoucherDetails: PartialPaymentMethodDetails {
     @_spi(AdyenInternal)
     public var checkoutAttemptId: String?
 
-    /// The brand of a payment method .
+    /// The brand of a payment method.
     internal let brand: PaymentMethodType
 
     /// The payment method type.
