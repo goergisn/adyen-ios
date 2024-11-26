@@ -17,7 +17,7 @@ public struct MealVoucherDetails: PartialPaymentMethodDetails {
     public var checkoutAttemptId: String?
 
     /// The brand of a payment method .
-    public let brand: PaymentMethodType
+    internal let brand: PaymentMethodType
 
     /// The payment method type.
     public let type: PaymentMethodType = .mealVoucher
