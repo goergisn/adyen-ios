@@ -41,8 +41,8 @@ class GiftCardComponentTests: XCTestCase {
     var securityCodeItemView: FormTextInputItemView? {
         sut.viewController.view.findView(with: "AdyenCard.GiftCardComponent.securityCodeItem")
     }
-
-    var expiryDateItemView: FormItemView<FormCardExpiryDateItem>? {
+    
+    var expiryDateItemView: FormTextItemView<FormCardExpiryDateItem>? {
         sut.viewController.view.findView(with: "AdyenCard.GiftCardComponent.expiryDateItem")
     }
 
@@ -93,8 +93,7 @@ class GiftCardComponentTests: XCTestCase {
         )
         
         // When
-        setupRootViewController(sut.viewController)
-        wait(for: .milliseconds(300))
+        sut.viewController.loadViewIfNeeded()
 
         // Then
         XCTAssertNil(expiryDateItemView, "should not have expiry date field for gift card")
@@ -114,13 +113,49 @@ class GiftCardComponentTests: XCTestCase {
         )
         
         // When
-        setupRootViewController(sut.viewController)
-        wait(for: .milliseconds(300))
+        sut.viewController.loadViewIfNeeded()
 
         // Then
         XCTAssertNotNil(expiryDateItemView, "should have expiry date field for meal voucher")
         XCTAssertNotNil(securityCodeItemView, "security code should be shown by default")
         XCTAssertEqual(securityCodeItemTitleLabel?.text, "Security code", "cvc title changes based on payment method")
+    }
+
+    func testMealVoucherDetails() {
+
+        // Given
+        let paymentMethod = MealVoucherPaymentMethod(type: .mealVoucherSodexo, name: "Sodexo")
+        sut = GiftCardComponent(
+            partialPaymentMethodType: .mealVoucher(paymentMethod),
+            context: context,
+            amount: amountToPay,
+            publicKeyProvider: publicKeyProvider
+        )
+
+        // When
+        sut.viewController.loadViewIfNeeded()
+
+        populate(textItemView: numberItemView!, with: "1234 1234 1234 1234")
+        populate(textItemView: securityCodeItemView!, with: "123")
+        populate(textItemView: expiryDateItemView!, with: "1233")
+        partialPaymentDelegate = PartialPaymentDelegateMock()
+        sut.partialPaymentDelegate = partialPaymentDelegate
+        let expectation = expectation(description: "Expect delegateMock.onDidSubmit to be called.")
+
+        // Then
+        partialPaymentDelegate.onCheckBalance = { data, component in
+            XCTAssertTrue(data.paymentMethod is MealVoucherDetails)
+            let paymentMethod = data.paymentMethod as! MealVoucherDetails
+            XCTAssertEqual(paymentMethod.type.rawValue, "mealVoucher_FR")
+            XCTAssertEqual(paymentMethod.brand.rawValue, "mealVoucher_FR_sodexo")
+            XCTAssertGreaterThan(paymentMethod.encryptedCardNumber.count, 0)
+            XCTAssertGreaterThan(paymentMethod.encryptedExpiryYear!.count, 0)
+            XCTAssertGreaterThan(paymentMethod.encryptedExpiryMonth!.count, 0)
+            XCTAssertGreaterThan(paymentMethod.encryptedSecurityCode.count, 0)
+            expectation.fulfill()
+        }
+        sut.didSelectSubmitButton()
+        waitForExpectations(timeout: 10, handler: nil)
     }
 
     func testCheckBalanceFailure() throws {
@@ -147,9 +182,7 @@ class GiftCardComponentTests: XCTestCase {
             onCheckBalanceExpectation.fulfill()
         }
 
-        setupRootViewController(sut.viewController)
-
-        wait(for: .milliseconds(300))
+        sut.viewController.loadViewIfNeeded()
 
         XCTAssertTrue(errorView!.isHidden)
 
@@ -167,9 +200,7 @@ class GiftCardComponentTests: XCTestCase {
 
     func testCheckBalanceCardNumberFormatting() throws {
 
-        setupRootViewController(sut.viewController)
-
-        wait(for: .milliseconds(300))
+        sut.viewController.loadViewIfNeeded()
 
         XCTAssertTrue(errorView!.isHidden)
 
@@ -202,9 +233,7 @@ class GiftCardComponentTests: XCTestCase {
             onCheckBalanceExpectation.fulfill()
         }
 
-        setupRootViewController(sut.viewController)
-
-        wait(for: .milliseconds(300))
+        sut.viewController.loadViewIfNeeded()
 
         XCTAssertTrue(errorView!.isHidden)
 
@@ -240,9 +269,7 @@ class GiftCardComponentTests: XCTestCase {
             onCheckBalanceExpectation.fulfill()
         }
 
-        setupRootViewController(sut.viewController)
-
-        wait(for: .milliseconds(300))
+        sut.viewController.loadViewIfNeeded()
 
         XCTAssertTrue(errorView!.isHidden)
 
@@ -278,9 +305,7 @@ class GiftCardComponentTests: XCTestCase {
             onCheckBalanceExpectation.fulfill()
         }
 
-        setupRootViewController(sut.viewController)
-
-        wait(for: .milliseconds(300))
+        sut.viewController.loadViewIfNeeded()
 
         XCTAssertTrue(errorView!.isHidden)
 
@@ -329,9 +354,7 @@ class GiftCardComponentTests: XCTestCase {
             onSubmitExpectation.fulfill()
         }
 
-        setupRootViewController(sut.viewController)
-
-        wait(for: .milliseconds(300))
+        sut.viewController.loadViewIfNeeded()
 
         XCTAssertTrue(errorView!.isHidden)
 
@@ -381,9 +404,7 @@ class GiftCardComponentTests: XCTestCase {
             onShowConfirmationExpectation.fulfill()
         }
 
-        setupRootViewController(sut.viewController)
-
-        wait(for: .milliseconds(300))
+        sut.viewController.loadViewIfNeeded()
 
         XCTAssertTrue(errorView!.isHidden)
 
@@ -436,9 +457,7 @@ class GiftCardComponentTests: XCTestCase {
             XCTFail("readyToSubmitPaymentComponentDelegate.onShowConfirmation must not be called")
         }
 
-        setupRootViewController(sut.viewController)
-
-        wait(for: .milliseconds(300))
+        sut.viewController.loadViewIfNeeded()
 
         XCTAssertTrue(errorView!.isHidden)
 
@@ -491,9 +510,7 @@ class GiftCardComponentTests: XCTestCase {
             XCTFail("readyToSubmitPaymentComponentDelegate.onShowConfirmation must not be called")
         }
 
-        setupRootViewController(sut.viewController)
-
-        wait(for: .milliseconds(300))
+        sut.viewController.loadViewIfNeeded()
 
         XCTAssertTrue(errorView!.isHidden)
 
@@ -545,9 +562,7 @@ class GiftCardComponentTests: XCTestCase {
             XCTFail("readyToSubmitPaymentComponentDelegate.onShowConfirmation must not be called")
         }
 
-        setupRootViewController(sut.viewController)
-
-        wait(for: .milliseconds(300))
+        sut.viewController.loadViewIfNeeded()
 
         XCTAssertTrue(errorView!.isHidden)
 
