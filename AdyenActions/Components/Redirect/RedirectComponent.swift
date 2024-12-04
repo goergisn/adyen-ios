@@ -157,6 +157,7 @@ public final class RedirectComponent: ActionComponent {
                 self.registerRedirectBounceBackListener(action)
                 self.delegate?.didOpenExternalApplication(component: self)
             } else {
+                self.sendErrorEvent(for: .redirect, code: .redirectFailed)
                 self.delegate?.didFail(with: RedirectComponent.Error.appNotFound, from: self)
             }
         }
@@ -181,6 +182,7 @@ public final class RedirectComponent: ActionComponent {
     
     private func handleNativeMobileRedirect(withReturnURL returnURL: URL, redirectStateData: String, _ action: RedirectAction) throws {
         guard let queryString = returnURL.query else {
+            sendErrorEvent(for: .redirect, code: .redirectParseFailed)
             throw Error.invalidRedirectParameters
         }
         let request = NativeRedirectResultRequest(
@@ -191,6 +193,7 @@ public final class RedirectComponent: ActionComponent {
             guard let self else { return }
             switch result {
             case let .failure(error):
+                self.sendErrorEvent(for: .api, code: .apiErrorNativeRedirect)
                 self.delegate?.didFail(with: error, from: self)
             case let .success(response):
                 self.notifyDelegateDidProvide(redirectDetails: response, action)
@@ -201,6 +204,15 @@ public final class RedirectComponent: ActionComponent {
     private func notifyDelegateDidProvide(redirectDetails: RedirectDetails, _ action: RedirectAction) {
         let actionData = ActionComponentData(details: redirectDetails, paymentData: action.paymentData)
         delegate?.didProvide(actionData, from: self)
+    }
+    
+    private func sendErrorEvent(for type: AnalyticsEventError.ErrorType, code: AnalyticsConstants.ErrorCode) {
+        var errorEvent = AnalyticsEventError(
+            component: configuration.componentName,
+            type: type
+        )
+        errorEvent.code = code.stringValue
+        context.analyticsProvider?.add(error: errorEvent)
     }
     
 }
