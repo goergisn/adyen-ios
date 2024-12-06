@@ -182,7 +182,7 @@ let package = Package(
         ),
         .binaryTarget(
             name: "TwintSDK",
-            path: "XCFramework/Dynamic/TwintSDK.xcframework"
+            path: "XCFramework/Static/TwintSDK.xcframework"
         ),
         .target(
             name: "AdyenDelegatedAuthentication",
