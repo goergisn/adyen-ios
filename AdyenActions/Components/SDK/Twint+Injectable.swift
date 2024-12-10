@@ -16,7 +16,8 @@ import Foundation
             completion: @escaping ([TWAppConfiguration]) -> Void
         ) {
             Twint.fetchInstalledAppConfigurations(withMaxIssuerNumber: maxIssuerNumber) { configurations in
-                completion(configurations ?? [])
+                let configurationObjects = (configurations as [NSObject]?) ?? []
+                completion(configurationObjects.compactMap { $0 as? TWAppConfiguration })
             }
         }
         
@@ -55,7 +56,7 @@ import Foundation
             cancelHandler: @escaping () -> Void
         ) -> UIAlertController? {
             Twint.controller(
-                for: installedAppConfigurations.map { $0 },
+                for: installedAppConfigurations,
                 selectedConfigurationHandler: { selectionHandler($0) },
                 cancelHandler: { cancelHandler() }
             )
