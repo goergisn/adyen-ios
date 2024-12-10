@@ -55,7 +55,7 @@ import Foundation
             cancelHandler: @escaping () -> Void
         ) -> UIAlertController? {
             Twint.controller(
-                for: installedAppConfigurations.map { $0 },
+                for: installedAppConfigurations,
                 selectedConfigurationHandler: { selectionHandler($0) },
                 cancelHandler: { cancelHandler() }
             )
