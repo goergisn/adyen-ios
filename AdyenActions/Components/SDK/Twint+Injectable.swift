@@ -71,8 +71,8 @@ import Foundation
         
         /// Re-casting **`[TWAppConfiguration]`** into **`[TWAppConfiguration]`** via **`[NSObject]`**
         ///
-        /// - **Background:** If different SDKs that use the **TwintSDK** internally are imported by an app
-        /// it can lead to the system providing a **TwintSDK** class of the other SDK resulting in a runtime crash when type checking.
+        /// - **Background:** If different SDKs that use the **TwintSDK** internally are imported by an app,
+        /// it can lead to the system providing a **TwintSDK** class of the other SDK, resulting in a runtime crash when type checking.
         /// See: [Github Issue](https://github.com/Adyen/adyen-ios/issues/1902)
         /// - **Solution:** To work around this we implicitly cast the `[TWAppConfiguration]` to an `[NSObject]`
         /// and then explicitly back to `[TWAppConfiguration]` which makes sure the correctly loaded class is used.
