@@ -14,19 +14,21 @@ import Foundation
 
     internal class TwintSpy: Twint {
     
-        internal typealias HandleFetchBlock = (@escaping ([TWAppConfiguration]) -> Void) -> Void
+        internal typealias HandleFetchBlock = (Int, @escaping ([TWAppConfiguration]) -> Void) -> Void
     
         internal typealias HandlePayBlock = (
             _ code: String,
             _ appConfiguration: TWAppConfiguration,
-            _ callbackAppScheme: String
-        ) -> Error?
+            _ callbackAppScheme: String,
+            _ completionHandler: @escaping ((any Error)?) -> Void
+        ) -> Void
 
         internal typealias HandleRegisterForUOF = (
             _ code: String,
             _ appConfiguration: TWAppConfiguration,
-            _ callbackAppScheme: String
-        ) -> Error?
+            _ callbackAppScheme: String,
+            _ completionHandler: @escaping ((any Error)?) -> Void
+        ) -> Void
 
         internal typealias HandleControllerBlock = (
             _ installedAppConfigurations: [TWAppConfiguration],
@@ -60,25 +62,28 @@ import Foundation
         }
     
         @objc override internal func fetchInstalledAppConfigurations(
+            maxIssuerNumber: Int,
             completion: @escaping ([TWAppConfiguration]) -> Void
         ) {
-            handleFetchInstalledAppConfigurations(completion)
+            handleFetchInstalledAppConfigurations(maxIssuerNumber, completion)
         }
-    
+
         @objc override internal func pay(
             withCode code: String,
             appConfiguration: TWAppConfiguration,
-            callback callbackAppScheme: String
-        ) -> Error? {
-            handlePay(code, appConfiguration, callbackAppScheme)
+            callback callbackAppScheme: String,
+            completionHandler: @escaping ((any Error)?) -> Void
+        ) {
+            handlePay(code, appConfiguration, callbackAppScheme, completionHandler)
         }
 
         @objc override internal func registerForUOF(
             withCode code: String,
             appConfiguration: TWAppConfiguration,
-            callback: String
-        ) -> Error? {
-            handleRegisterForUOF(code, appConfiguration, callback)
+            callback: String,
+            completionHandler: @escaping (Error?) -> Void
+        ) {
+            handleRegisterForUOF(code, appConfiguration, callback, completionHandler)
         }
 
         @objc override internal func controller(

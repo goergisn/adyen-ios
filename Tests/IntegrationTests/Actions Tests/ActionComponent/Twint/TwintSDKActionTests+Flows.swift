@@ -103,15 +103,16 @@ import XCTest
         
             var twintResponseHandler: ((Error?) -> Void)?
         
-            let twintSpy = TwintSpy { configurationsBlock in
+            let twintSpy = TwintSpy { maxIssuerNumber, configurationsBlock in
+                XCTAssertEqual(maxIssuerNumber, .max)
                 fetchBlockExpectation.fulfill()
                 configurationsBlock([.dummy])
-            } handlePay: { code, appConfiguration, callbackAppScheme in
+            } handlePay: { code, appConfiguration, callbackAppScheme, completionHandler in
                 payBlockExpectation.fulfill()
-                return nil
-            } handleRegisterForUOF: { _, _, _ in
+                completionHandler(nil)
+            } handleRegisterForUOF: { _, _, _, completionHandler in
                 XCTFail("RegisterForUOF should not have been called.")
-                return nil
+                completionHandler(nil)
             } handleController: { installedAppConfigurations, selectionHandler, cancelHandler in
                 XCTFail("Twint controller should not have been shown")
                 return nil

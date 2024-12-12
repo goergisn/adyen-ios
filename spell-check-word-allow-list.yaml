@@ -39,6 +39,7 @@ whiteList:
   - qiwi
   - qiwiwallet
   - boletobancario
+  - boletoBancarioItau
   - applepay
   - wechatpay
   - mbway
@@ -204,3 +205,7 @@ whiteList:
   - appslist
   - unfocus
   - youtrack
+  - itau
+  - primeiropay
+  - SDKs
+  - ks

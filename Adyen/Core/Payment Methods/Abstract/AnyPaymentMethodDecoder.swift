@@ -79,14 +79,18 @@ internal enum AnyPaymentMethodDecoder {
         .econtextStores: EContextStoresPaymentMethodDecoder(),
         .econtextATM: EContextATMPaymentMethodDecoder(),
         .econtextOnline: EContextOnlinePaymentMethodDecoder(),
-        .boleto: BoletoPaymentMethodDecoder(),
+        .boletoBancario: BoletoPaymentMethodDecoder(),
+        .boletoBancarioSantander: BoletoPaymentMethodDecoder(),
+        .boletoBancarioItau: BoletoPaymentMethodDecoder(),
+        .primeiroPayBoleto: BoletoPaymentMethodDecoder(),
         .affirm: AffirmPaymentMethodDecoder(),
         .atome: AtomePaymentMethodDecoder(),
         .onlineBankingCZ: OnlineBankingPaymentMethodDecoder(),
         .onlineBankingSK: OnlineBankingPaymentMethodDecoder(),
         .upi: UPIPaymentMethodDecoder(),
         .cashAppPay: CashAppPayPaymentMethodDecoder(),
-        .twint: TwintPaymentMethodDecoder()
+        .twint: TwintPaymentMethodDecoder(),
+        .payByBankAISDD: PayByBankUSPaymentMethodDecoder()
     ]
     
     private static var defaultDecoder: PaymentMethodDecoder = InstantPaymentMethodDecoder()
@@ -341,6 +345,26 @@ private struct BLIKPaymentMethodDecoder: PaymentMethodDecoder {
     }
 }
 
+private struct PayByBankUSPaymentMethodDecoder: PaymentMethodDecoder {
+    func decode(from decoder: Decoder, isStored: Bool) throws -> AnyPaymentMethod {
+        if isStored {
+            return try .storedPayByBankUS(.init(from: decoder))
+        } else {
+            return try .payByBankUS(.init(from: decoder))
+        }
+    }
+
+    func anyPaymentMethod(from paymentMethod: any PaymentMethod) -> AnyPaymentMethod? {
+        if let method = paymentMethod as? StoredPayByBankUSPaymentMethod {
+            return .storedPayByBankUS(method)
+        }
+        if let method = paymentMethod as? PayByBankUSPaymentMethod {
+            return .payByBankUS(method)
+        }
+        return nil
+    }
+}
+
 private struct DokuPaymentMethodDecoder: PaymentMethodDecoder {
     func decode(from decoder: Decoder, isStored: Bool) throws -> AnyPaymentMethod {
         try .doku(DokuPaymentMethod(from: decoder))
@@ -413,11 +437,11 @@ private struct EContextOnlinePaymentMethodDecoder: PaymentMethodDecoder {
 
 private struct BoletoPaymentMethodDecoder: PaymentMethodDecoder {
     func decode(from decoder: Decoder, isStored: Bool) throws -> AnyPaymentMethod {
-        try .boleto(BoletoPaymentMethod(from: decoder))
+        try .boletoBancarioSantander(BoletoPaymentMethod(from: decoder))
     }
 
     func anyPaymentMethod(from paymentMethod: any PaymentMethod) -> AnyPaymentMethod? {
-        (paymentMethod as? BoletoPaymentMethod).map { .boleto($0) }
+        (paymentMethod as? BoletoPaymentMethod).map { .boletoBancarioSantander($0) }
     }
 }
 
