@@ -180,7 +180,7 @@ extension FormCardNumberItemView {
         private func updateLogos() {
             imageLoadingTasks.forEach { $0.cancel() }
             
-            guard let primaryLogoUrl, window != nil else { return }
+            guard let primaryLogoUrl else { return }
             
             var imageLoadingTasks = [primaryLogoView.load(
                 url: primaryLogoUrl,
