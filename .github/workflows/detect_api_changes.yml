@@ -35,18 +35,13 @@ jobs:
        
     - name: 👾 Define Diff Versions
       run: |
-        echo "Repository: ${{ github.repository }}"
-        echo "Server URL: ${{ github.server_url }}"
-        echo "Full Name: ${{ github.event.pull_request.head.repo.full_name }}"
-        echo "Github: ${{ github }}"
-        
-        NEW="${{ env.source }}~${{ env.githubRepo }}"
+        NEW="${{ env.source }}~${{ env.headGithubRepo }}"
         if [[ '${{ github.head_ref || env.noTargetBranch }}' == release/* ]]
         then
             LATEST_TAG=$(git describe --tags --abbrev=0)
-            OLD="$LATEST_TAG~${{ env.githubRepo }}"
+            OLD="$LATEST_TAG~${{ env.baseGithubRepo }}"
         else
-            OLD="${{ env.target }}~${{ env.githubRepo }}"
+            OLD="${{ env.target }}~${{ env.baseGithubRepo }}"
         fi
         
         # Providing the output to the environment
@@ -55,7 +50,8 @@ jobs:
       env:
         source: '${{ github.event.inputs.new || github.head_ref }}'
         target: '${{ github.event.inputs.old || github.event.pull_request.base.ref }}'
-        githubRepo: '${{github.server_url}}/${{github.repository}}.git'
+        headGithubRepo: '${{github.server_url}}/${{ github.event.pull_request.head.repo.full_name || github.repository}}.git'
+        baseGithubRepo: '${{github.server_url}}/${{github.repository}}.git'
         noTargetBranch: 'no target branch'
 
     - name: 🔍 Detect Changes
