@@ -35,6 +35,10 @@ jobs:
        
     - name: 👾 Define Diff Versions
       run: |
+        echo "Repository: ${{ github.repository }}"
+        echo "Server URL: ${{ github.server_url }}"
+        echo "Github: ${{ github }}"
+        
         NEW="${{ env.source }}~${{ env.githubRepo }}"
         if [[ '${{ github.head_ref || env.noTargetBranch }}' == release/* ]]
         then
