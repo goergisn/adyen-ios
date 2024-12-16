@@ -133,6 +133,9 @@ extension FormCardNumberItemView {
         }
         
         private func resetLogos() {
+            primaryLogoUrl = nil
+            secondaryLogoUrl = nil
+
             primaryLogoView.image = Constant.placeholderImage
             primaryLogoView.alpha = selectedViewAlpha
             primaryLogoView.removeGestureRecognizer(primaryGestureRecognizer)
