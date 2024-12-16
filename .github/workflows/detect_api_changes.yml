@@ -37,6 +37,7 @@ jobs:
       run: |
         echo "Repository: ${{ github.repository }}"
         echo "Server URL: ${{ github.server_url }}"
+        echo "Full Name: ${{ github.event.pull_request.head.repo.full_name }}"
         echo "Github: ${{ github }}"
         
         NEW="${{ env.source }}~${{ env.githubRepo }}"
