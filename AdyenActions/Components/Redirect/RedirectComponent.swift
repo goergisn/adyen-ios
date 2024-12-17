@@ -69,6 +69,8 @@ public final class RedirectComponent: ActionComponent {
     /// The component configurations.
     public var configuration: Configuration
     
+    private var action: RedirectAction?
+    
     /// Initializes the component.
     ///
     /// - Parameter context: The context object for this component.
@@ -99,6 +101,8 @@ public final class RedirectComponent: ActionComponent {
             flavor: _isDropIn ? .dropin : .components,
             context: context.apiContext
         )
+        
+        self.action = action
         
         if action.url.adyen.isHttp {
             openHttpSchemeUrl(action)
@@ -207,6 +211,7 @@ public final class RedirectComponent: ActionComponent {
     }
     
     private func sendErrorEvent(for type: AnalyticsEventError.ErrorType, code: AnalyticsConstants.ErrorCode) {
+        let componentName = action?.paymentMethodType ?? configuration.componentName
         var errorEvent = AnalyticsEventError(
             component: configuration.componentName,
             type: type
