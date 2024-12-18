@@ -39,38 +39,6 @@ jobs:
           os: 'macos-13-xl'
           xcode_version: '14.3'
           needs_custom_sim: false # Takes the shipped simulator that comes with Xcode 14
-        
-        - version: '15.0'
-          runtime: 'iOS-15-0'
-          device: 'iPhone 14'
-          displayname: 'iPhone-14'
-          os: 'macos-13'
-          xcode_version: '14.1'
-          needs_custom_sim: true
-        
-        - version: '14.2'
-          runtime: 'iOS-14-2'
-          device: 'iPhone 14'
-          displayname: 'iPhone-14'
-          os: 'macos-13'
-          xcode_version: '14.1'
-          needs_custom_sim: true
-          
-        - version: '13.0'
-          runtime: 'iOS-13-0'
-          device: 'iPhone 14'
-          displayname: 'iPhone-14'
-          os: 'macos-13'
-          xcode_version: '14.1'
-          needs_custom_sim: true
-
-        - version: '12.0'
-          runtime: 'iOS-12-0'
-          device: 'iPhone 14'
-          displayname: 'iPhone-14'
-          os: 'macos-13'
-          xcode_version: '14.1'
-          needs_custom_sim: true
           
     steps:
     - uses: actions/checkout@v4
