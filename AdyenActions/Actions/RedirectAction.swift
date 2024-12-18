@@ -26,6 +26,7 @@ public struct RedirectAction: Decodable {
     ///   - url: The URL to which to redirect the user.
     ///   - paymentData: The server-generated payment data that should be submitted to the `/payments/details` endpoint.
     ///   - nativeRedirectData: Native redirect data.
+    ///   - paymentMethodType: The type of the payment method.
     public init(
         url: URL,
         paymentData: String?,
