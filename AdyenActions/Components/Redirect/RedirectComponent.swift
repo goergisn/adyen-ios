@@ -161,7 +161,7 @@ public final class RedirectComponent: ActionComponent {
                 self.registerRedirectBounceBackListener(action)
                 self.delegate?.didOpenExternalApplication(component: self)
             } else {
-                self.sendErrorEvent(for: .redirect, code: .redirectFailed)
+                self.sendErrorEvent(.redirectFailed, type: .redirect)
                 self.delegate?.didFail(with: RedirectComponent.Error.appNotFound, from: self)
             }
         }
@@ -186,7 +186,7 @@ public final class RedirectComponent: ActionComponent {
     
     private func handleNativeMobileRedirect(withReturnURL returnURL: URL, redirectStateData: String, _ action: RedirectAction) throws {
         guard let queryString = returnURL.query else {
-            sendErrorEvent(for: .redirect, code: .redirectParseFailed)
+            sendErrorEvent(.redirectParseFailed, type: .redirect)
             throw Error.invalidRedirectParameters
         }
         let request = NativeRedirectResultRequest(
@@ -197,7 +197,7 @@ public final class RedirectComponent: ActionComponent {
             guard let self else { return }
             switch result {
             case let .failure(error):
-                self.sendErrorEvent(for: .api, code: .apiErrorNativeRedirect)
+                self.sendErrorEvent(.apiErrorNativeRedirect, type: .api)
                 self.delegate?.didFail(with: error, from: self)
             case let .success(response):
                 self.notifyDelegateDidProvide(redirectDetails: response, action)
@@ -210,10 +210,10 @@ public final class RedirectComponent: ActionComponent {
         delegate?.didProvide(actionData, from: self)
     }
     
-    private func sendErrorEvent(for type: AnalyticsEventError.ErrorType, code: AnalyticsConstants.ErrorCode) {
+    private func sendErrorEvent(_ code: AnalyticsConstants.ErrorCode, type: AnalyticsEventError.ErrorType) {
         let componentName = action?.paymentMethodType ?? configuration.componentName
         var errorEvent = AnalyticsEventError(
-            component: configuration.componentName,
+            component: componentName,
             type: type
         )
         errorEvent.code = code.stringValue
