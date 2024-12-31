@@ -23,6 +23,12 @@ public final class CashAppPayComponent: PaymentComponent,
         static let storeDetailsItem = "storeDetailsItem"
         static let cashAppButtonItem = "cashAppButtonItem"
     }
+    
+    private enum ErrorMessage {
+        static let unexpectedError = "CashApp unexpected error"
+        static let apiError = "CashApp api error"
+        static let integrationError = "CashApp integration error"
+    }
 
     /// The context object for this component.
     @_spi(AdyenInternal)
@@ -209,7 +215,7 @@ public final class CashAppPayComponent: PaymentComponent,
                 storePaymentMethod: storePayment
             ))
         } catch {
-            fail(with: error)
+            fail(with: error, message: error.localizedDescription)
         }
     }
 
@@ -225,23 +231,36 @@ extension CashAppPayComponent: CashAppPayObserver {
         case let .approved(request, grants):
             submitApprovedRequest(with: grants, profile: request.customerProfile)
         case let .apiError(error):
-            fail(with: error)
+            fail(with: error, message: ErrorMessage.apiError)
         case let .networkError(error):
-            fail(with: error)
+            fail(with: error, message: error.localizedDescription)
         case let .unexpectedError(error):
-            fail(with: error)
+            fail(with: error, message: ErrorMessage.unexpectedError)
         case let .integrationError(error):
-            fail(with: error)
+            fail(with: error, message: ErrorMessage.integrationError)
         case .declined:
-            fail(with: Error.declined)
+            let error = Error.declined
+            fail(with: error, message: error.localizedDescription)
         default:
             break
         }
     }
 
-    private func fail(with error: Swift.Error) {
+    private func fail(with error: Swift.Error, message: String? = nil) {
         stopLoading()
+        sendThirdPartyErrorEvent(with: message)
         delegate?.didFail(with: error, from: self)
+    }
+    
+    private func sendThirdPartyErrorEvent(with message: String?) {
+        var errorEvent = AnalyticsEventError(
+            component: paymentMethod.type.rawValue,
+            type: .thirdParty
+        )
+        errorEvent.code = AnalyticsConstants.ErrorCode.thirdPartyError.stringValue
+        errorEvent.message = message
+        
+        context.analyticsProvider?.add(error: errorEvent)
     }
 }
 
@@ -255,7 +274,7 @@ extension CashAppPayComponent {
         /// Payment was declined by the Cash App Pay app.
         case declined
     
-        public var errorDescription: String? {
+        public var localizedDescription: String? {
             switch self {
             case .noGrant:
                 return "There was no grant object in the customer request."
