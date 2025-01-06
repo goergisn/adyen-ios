@@ -50,6 +50,7 @@ import XCTest
         static func actionComponent(
             with twintSpy: TwintSpy,
             configuration: TwintSDKActionComponent.Configuration = .dummy,
+            context: AdyenContext = Dummy.context,
             presentationDelegate: PresentationDelegate?,
             delegate: ActionComponentDelegate?,
             shouldFailPolling: Bool = false
@@ -64,7 +65,7 @@ import XCTest
             }
         
             let component = TwintSDKActionComponent(
-                context: Dummy.context,
+                context: context,
                 configuration: configuration,
                 twint: twintSpy,
                 pollingComponentBuilder: pollingBuilder
@@ -114,7 +115,7 @@ import XCTest
             return actionComponentDelegateMock
         }
     
-        /// ActionComponentDelegateMock that fails when `onDidFail` is called
+        /// ActionComponentDelegateMock that fails when `onDidProvide` is called
         static func failureFlowActionComponentDelegateMock(
             onDidFail: @escaping (Error) -> Void
         ) -> ActionComponentDelegateMock {

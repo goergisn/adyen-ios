@@ -117,7 +117,10 @@ import Foundation
                         .twintNoAppsInstalledMessage,
                         self.configuration.localizationParameters
                     )
-                    self.handleShowError(errorMessage)
+                    self.handleShowError(
+                        errorMessage,
+                        componentName: action.paymentMethodType
+                    )
                     return
                 }
 
@@ -133,7 +136,10 @@ import Foundation
             let completionHandler: (Error?) -> Void = { [weak self] error in
                 guard let self else { return }
                 if let error {
-                    self.handleShowError(error.localizedDescription)
+                    self.handleShowError(
+                        error.localizedDescription,
+                        componentName: action.paymentMethodType
+                    )
                     return
                 }
 
@@ -212,10 +218,14 @@ import Foundation
             presentationDelegate.present(component: presentableComponent)
         }
 
-        private func handleShowError(_ error: String) {
+        private func handleShowError(_ errorMessage: String, componentName: String) {
+            sendThirdPartyErrorEvent(
+                with: errorMessage,
+                componentName: componentName
+            )
             let alert = UIAlertController(
                 title: nil,
-                message: error,
+                message: errorMessage,
                 preferredStyle: .alert
             )
             alert.addAction(
@@ -234,6 +244,17 @@ import Foundation
 
         private func cleanup() {
             pollingComponent?.didCancel()
+        }
+        
+        private func sendThirdPartyErrorEvent(with message: String?, componentName: String) {
+            var errorEvent = AnalyticsEventError(
+                component: componentName,
+                type: .thirdParty
+            )
+            errorEvent.code = AnalyticsConstants.ErrorCode.thirdPartyError.stringValue
+            errorEvent.message = message
+            
+            context.analyticsProvider?.add(error: errorEvent)
         }
     }
 
