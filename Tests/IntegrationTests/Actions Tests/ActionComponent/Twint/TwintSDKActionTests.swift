@@ -243,15 +243,25 @@ import XCTest
                 return false
             }
 
+            let analyticsProviderMock = AnalyticsProviderMock()
             let presentationDelegate = PresentationDelegateMock()
+            
             presentationDelegate.doPresent = { component in
                 let alertController = try XCTUnwrap(component.viewController as? UIAlertController)
                 XCTAssertEqual(alertController.message, expectedAlertMessage)
+                let errorEvent = analyticsProviderMock.errors[0]
+                XCTAssertEqual(errorEvent.component, "paymentMethodType")
+                XCTAssertEqual(errorEvent.errorType, .thirdParty)
+                XCTAssertEqual(
+                    errorEvent.code,
+                    AnalyticsConstants.ErrorCode.thirdPartyError.stringValue
+                )
                 alertExpectation.fulfill()
             }
 
             let twintActionComponent = Self.actionComponent(
                 with: twintSpy,
+                context: Dummy.context(with: analyticsProviderMock),
                 presentationDelegate: presentationDelegate,
                 delegate: nil
             )

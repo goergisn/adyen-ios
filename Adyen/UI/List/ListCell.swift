@@ -24,6 +24,16 @@ public final class ListCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override public func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+            
+        guard let highlightedBackgroundColor = item?.style.highlightedBackgroundColor else {
+            return
+        }
+        
+        contentView.backgroundColor = highlighted ? highlightedBackgroundColor : item?.style.backgroundColor
+    }
+    
     // MARK: - Item
     
     /// The item displayed in the cell cell.

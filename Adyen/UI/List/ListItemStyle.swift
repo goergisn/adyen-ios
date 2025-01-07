@@ -42,6 +42,9 @@ public struct ListItemStyle: ViewStyle {
     
     public var backgroundColor = UIColor.Adyen.componentBackground
     
+    /// Background color when highlighted (tapped).
+    public var highlightedBackgroundColor: UIColor?
+    
     /// Initializes the list item style.
     ///
     /// - Parameter title: The title style.
