@@ -63,6 +63,7 @@ public struct RedirectAction: Decodable {
         self.paymentData = try container.decodeIfPresent(String.self, forKey: .paymentData)
         self.type = try container.decode(RedirectType.self, forKey: .type)
         self.nativeRedirectData = try container.decodeIfPresent(String.self, forKey: .nativeRedirectData)
+        self.paymentMethodType = try container.decodeIfPresent(String.self, forKey: .paymentMethodType)
     }
 
     // MARK: - Private
@@ -72,5 +73,6 @@ public struct RedirectAction: Decodable {
         case paymentData
         case type
         case nativeRedirectData
+        case paymentMethodType
     }
 }
