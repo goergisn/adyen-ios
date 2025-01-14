@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2024 Adyen N.V.
+// Copyright (c) 2025 Adyen N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
@@ -11,8 +11,8 @@ import XCTest
 
 class BoletoComponentTests: XCTestCase {
 
-    private var method = BoletoPaymentMethod(type: .boleto, name: "Boleto Bancario")
-
+    private var method = BoletoPaymentMethod(type: .boletoBancarioSantander, name: "Boleto Bancario")
+    
     func testFullPrefilledInfo() throws {
         // Given
 

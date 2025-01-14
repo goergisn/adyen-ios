@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2024 Adyen N.V.
+// Copyright (c) 2019 Adyen N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
@@ -32,7 +32,9 @@ public struct RedirectAction: Decodable {
 
     /// Native redirect data.
     public let nativeRedirectData: String?
-
+    
+    internal let paymentMethodType: String?
+    
     /// Initializes a redirect action.
     ///
     /// - Parameters:
@@ -40,16 +42,19 @@ public struct RedirectAction: Decodable {
     ///   - paymentData: The server-generated payment data that should be submitted to the `/payments/details` endpoint.
     ///   - type: The redirect flow  used by the action. Defaults to `redirect`.
     ///   - nativeRedirectData: Native redirect data. Defaults to `nil`.
+    ///   - paymentMethodType: The type of the payment method.
     public init(
         url: URL,
         paymentData: String?,
         type: RedirectType = .redirect,
-        nativeRedirectData: String? = nil
+        nativeRedirectData: String? = nil,
+        paymentMethodType: String? = nil
     ) {
         self.url = url
         self.paymentData = paymentData
         self.type = type
         self.nativeRedirectData = nativeRedirectData
+        self.paymentMethodType = paymentMethodType
     }
 
     public init(from decoder: any Decoder) throws {

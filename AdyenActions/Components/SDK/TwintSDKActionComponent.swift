@@ -43,6 +43,14 @@ import Foundation
             /// - Important: This value is  required to only provide the scheme,
             /// without a host/path/.... (e.g. "my-app", not a url "my-app://...")
             public let callbackAppScheme: String
+            
+            /// The issuer number of the highest scheme you listed under `LSApplicationQueriesSchemes`.
+            /// E.g. pass 39, if you listed all schemes from "twint-issuer1" up to and including "twint-issuer39". The value is clamped between 0 and 39.
+            ///
+            /// - Important: All apps above "twint-issuer39" will always be returned if one of these apps is installed. For this to work, `LSApplicationQueriesSchemes` must include "twint-extended".
+            /// If you configure any `maxIssuerNumber` below 39, the result will always contain all apps above `maxIssuerNumber` up to and including 39, even if none of them are installed.
+            /// Additionally, if the fetch fails and the cache is empty, none of these apps will be found when probing.
+            public let maxIssuerNumber: Int
 
             /// Initializes an instance of `Configuration`
             ///
@@ -55,10 +63,12 @@ import Foundation
             public init(
                 style: AwaitComponentStyle = .init(),
                 callbackAppScheme: String,
+                maxIssuerNumber: Int = .max,
                 localizationParameters: LocalizationParameters? = nil
             ) {
                 self.style = style
                 self.callbackAppScheme = callbackAppScheme
+                self.maxIssuerNumber = maxIssuerNumber
                 self.localizationParameters = localizationParameters
             }
         }
@@ -99,7 +109,7 @@ import Foundation
         /// - Parameter action: The Twint SDK action object.
         public func handle(_ action: TwintSDKAction) {
             AdyenAssertion.assert(message: "presentationDelegate is nil", condition: presentationDelegate == nil)
-            twint.fetchInstalledAppConfigurations { [weak self] installedApps in
+            twint.fetchInstalledAppConfigurations(maxIssuerNumber: configuration.maxIssuerNumber) { [weak self] installedApps in
                 guard let self else { return }
 
                 guard let firstApp = installedApps.first else {
@@ -107,7 +117,10 @@ import Foundation
                         .twintNoAppsInstalledMessage,
                         self.configuration.localizationParameters
                     )
-                    self.handleShowError(errorMessage)
+                    self.handleShowError(
+                        errorMessage,
+                        componentName: action.paymentMethodType
+                    )
                     return
                 }
 
@@ -120,31 +133,37 @@ import Foundation
         }
 
         private func invokeTwint(app: TWAppConfiguration, action: TwintSDKAction) {
-            let error: Error?
+            let completionHandler: (Error?) -> Void = { [weak self] error in
+                guard let self else { return }
+                if let error {
+                    self.handleShowError(
+                        error.localizedDescription,
+                        componentName: action.paymentMethodType
+                    )
+                    return
+                }
+
+                RedirectListener.registerForURL { [weak self] url in
+                    self?.twint.handleOpen(url) { [weak self] error in
+                        self?.handlePaymentResult(error: error, action: action)
+                    }
+                }
+            }
 
             if action.sdkData.isStored {
-                error = twint.registerForUOF(
+                twint.registerForUOF(
                     withCode: action.sdkData.token,
                     appConfiguration: app,
-                    callback: configuration.callbackAppScheme
+                    callback: configuration.callbackAppScheme,
+                    completionHandler: completionHandler
                 )
             } else {
-                error = twint.pay(
+                twint.pay(
                     withCode: action.sdkData.token,
                     appConfiguration: app,
-                    callback: configuration.callbackAppScheme
+                    callback: configuration.callbackAppScheme,
+                    completionHandler: completionHandler
                 )
-            }
-
-            if let error {
-                handleShowError(error.localizedDescription)
-                return
-            }
-
-            RedirectListener.registerForURL { [weak self] url in
-                self?.twint.handleOpen(url) { [weak self] error in
-                    self?.handlePaymentResult(error: error, action: action)
-                }
             }
         }
 
@@ -199,10 +218,14 @@ import Foundation
             presentationDelegate.present(component: presentableComponent)
         }
 
-        private func handleShowError(_ error: String) {
+        private func handleShowError(_ errorMessage: String, componentName: String) {
+            sendThirdPartyErrorEvent(
+                with: errorMessage,
+                componentName: componentName
+            )
             let alert = UIAlertController(
                 title: nil,
-                message: error,
+                message: errorMessage,
                 preferredStyle: .alert
             )
             alert.addAction(
@@ -221,6 +244,17 @@ import Foundation
 
         private func cleanup() {
             pollingComponent?.didCancel()
+        }
+        
+        private func sendThirdPartyErrorEvent(with message: String?, componentName: String) {
+            var errorEvent = AnalyticsEventError(
+                component: componentName,
+                type: .thirdParty
+            )
+            errorEvent.code = AnalyticsConstants.ErrorCode.thirdPartyError.stringValue
+            errorEvent.message = message
+            
+            context.analyticsProvider?.add(error: errorEvent)
         }
     }
 

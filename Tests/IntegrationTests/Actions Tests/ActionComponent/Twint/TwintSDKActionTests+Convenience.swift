@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2024 Adyen N.V.
+// Copyright (c) 2025 Adyen N.V.
 //
 // This file is open source and available under the MIT license. See the LICENSE file for more info.
 //
@@ -26,6 +26,10 @@ import XCTest
         static var dummy: Self {
             .init(callbackAppScheme: "ui-host")
         }
+        
+        static func dummy(maxIssuerNumber: Int) -> Self {
+            .init(callbackAppScheme: "ui-host", maxIssuerNumber: maxIssuerNumber)
+        }
     }
 
     extension TwintSDKAction {
@@ -45,6 +49,8 @@ import XCTest
     
         static func actionComponent(
             with twintSpy: TwintSpy,
+            configuration: TwintSDKActionComponent.Configuration = .dummy,
+            context: AdyenContext = Dummy.context,
             presentationDelegate: PresentationDelegate?,
             delegate: ActionComponentDelegate?,
             shouldFailPolling: Bool = false
@@ -59,8 +65,8 @@ import XCTest
             }
         
             let component = TwintSDKActionComponent(
-                context: Dummy.context,
-                configuration: .dummy,
+                context: context,
+                configuration: configuration,
                 twint: twintSpy,
                 pollingComponentBuilder: pollingBuilder
             )
@@ -109,7 +115,7 @@ import XCTest
             return actionComponentDelegateMock
         }
     
-        /// ActionComponentDelegateMock that fails when `onDidFail` is called
+        /// ActionComponentDelegateMock that fails when `onDidProvide` is called
         static func failureFlowActionComponentDelegateMock(
             onDidFail: @escaping (Error) -> Void
         ) -> ActionComponentDelegateMock {
