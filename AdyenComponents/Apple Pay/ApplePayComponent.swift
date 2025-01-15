@@ -78,10 +78,12 @@ public class ApplePayComponent: NSObject, PresentableComponent, PaymentComponent
         super.init()
 
         paymentAuthorizationViewController?.delegate = self
+        sendInitialAnalytics()
     }
 
     public var viewController: UIViewController {
-        createPaymentAuthorizationViewController()
+        sendDidLoadEvent()
+        return createPaymentAuthorizationViewController()
     }
 
     public func didFinalize(with success: Bool, completion: (() -> Void)?) {
@@ -130,6 +132,3 @@ extension ApplePayComponent {
 
 @_spi(AdyenInternal)
 extension ApplePayComponent: TrackableComponent {}
-
-@_spi(AdyenInternal)
-extension ApplePayComponent: ViewControllerDelegate {}
