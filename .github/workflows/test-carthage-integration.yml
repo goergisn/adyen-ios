@@ -6,15 +6,14 @@ on:
   
   push:
     branches:
-    - master
     - develop
 
 jobs:
 
   carthage:
-    runs-on: macos-14-xlarge
+    runs-on: macos-14-xlarge # Apple Silicon Runner
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: n1hility/cancel-previous-runs@v3
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
