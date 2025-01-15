@@ -27,6 +27,7 @@ jobs:
       run: |
         brew update
         brew install xcodegen
+        brew install carthage
         brew upgrade carthage
 
     - name: Test Carthage Integration
