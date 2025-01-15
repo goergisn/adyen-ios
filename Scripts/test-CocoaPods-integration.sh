@@ -89,11 +89,7 @@ then
     use_frameworks!
 
     pod 'Adyen', :path => '../'
-    pod 'Adyen/Session', :path => '../'
     pod 'Adyen/SwiftUI', :path => '../'
-    pod 'Adyen/DelegatedAuthentication', :path => '../'
-    pod 'Adyen/CashAppPay', :path => '../'
-    pod 'Adyen/AdyenTwint', :path => '../'
   end
 
   post_install do |installer|
@@ -115,9 +111,6 @@ else
     pod 'Adyen', :path => '../'
     pod 'Adyen/WeChatPay', :path => '../'
     pod 'Adyen/SwiftUI', :path => '../'
-    pod 'AdyenAuthentication'
-    pod 'Adyen/CashAppPay', :path => '../'
-    pod 'Adyen/AdyenTwint', :path => '../'
   end
 
   post_install do |installer|
