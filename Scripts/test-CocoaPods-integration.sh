@@ -73,9 +73,7 @@ let package = Package(
 
 " > Package.swift
 
-swift package update
-
-swift package generate-xcodeproj
+xcodegen generate
 
 # Create a Podfile with our pod as dependency.
 
