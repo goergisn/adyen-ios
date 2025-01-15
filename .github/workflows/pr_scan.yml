@@ -43,11 +43,10 @@ jobs:
         xcodebuild -version
         xcodebuild clean build test -project "${project}" -scheme "${scheme}" ${params} -destination "${destination}" | xcpretty && exit ${PIPESTATUS[0]}
       env:
+        destination: "name=iPhone 15 Pro,OS=17.2"
         project: 'Adyen.xcodeproj'
         params: '-derivedDataPath ./DerivedData -enableCodeCoverage YES'
         scheme: 'AdyenUIHost'
-        destination: 'name=iPhone-15'
-
     - name: Slather
       run: |
         slather coverage --sonarqube-xml ${params} ${project}
