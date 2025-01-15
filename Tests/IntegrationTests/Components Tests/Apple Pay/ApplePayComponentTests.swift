@@ -424,7 +424,7 @@ class ApplePayComponentTest: XCTestCase {
         )
 
         // When
-        sut.viewDidLoad(viewController: mockViewController)
+        sut.viewController.loadViewIfNeeded()
 
         // Then
         XCTAssertEqual(analyticsProviderMock.initialEventCallsCount, 1)
