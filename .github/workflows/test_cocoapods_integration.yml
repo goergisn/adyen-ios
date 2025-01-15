@@ -6,7 +6,6 @@ on:
 
   push:
     branches:
-    - master
     - develop
 
 jobs:
@@ -14,7 +13,7 @@ jobs:
   pods:
     runs-on: macos-14-xlarge
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - uses: n1hility/cancel-previous-runs@v3
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
