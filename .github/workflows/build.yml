@@ -16,14 +16,39 @@ jobs:
       fail-fast: false
       matrix:
         include:
-        - destination: 'name=iPhone 11 Pro'
-          scheme: AdyenUIHost
-        - destination: 'name=iPhone-6,OS=11.4'
-          scheme: AdyenUIHost
-        - destination: 'name=iPhone-X,OS=12.4'
-          scheme: AdyenUIKitTests
-        - destination: 'name=iPhone 8,OS=13.7'
-          scheme: AdyenUIHost
+
+        - version: '17.2'
+          runtime: 'iOS-17-2'
+          device: 'iPhone 15'
+          displayname: 'iPhone-15'
+          os: 'macos-14-xlarge'
+          xcode_version: '15.1'
+          needs_custom_sim: false # Takes the shipped simulator that comes with Xcode 15
+          
+        - version: '17.2'
+          runtime: 'iOS-17-2'
+          device: 'iPad Air (5th generation)'
+          displayname: 'iPad-Air-5'
+          os: 'macos-14-xlarge'
+          xcode_version: '15.1'
+          needs_custom_sim: false # Takes the shipped simulator that comes with Xcode 15
+        
+        - version: '16.4'
+          runtime: 'iOS-16-4'
+          device: 'iPhone 14'
+          displayname: 'iPhone-14'
+          os: 'macos-13'
+          xcode_version: '14.3'
+          needs_custom_sim: false # Takes the shipped simulator that comes with Xcode 14
+          
+        # - destination: 'name=iPhone 11 Pro'
+        #   scheme: AdyenUIHost
+        # - destination: 'name=iPhone-6,OS=11.4'
+        #   scheme: AdyenUIHost
+        # - destination: 'name=iPhone-X,OS=12.4'
+        #   scheme: AdyenUIKitTests
+        # - destination: 'name=iPhone 8,OS=13.7'
+        #   scheme: AdyenUIHost
     steps:
     - uses: actions/checkout@v3
     - uses: n1hility/cancel-previous-runs@v3
