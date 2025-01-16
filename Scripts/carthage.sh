@@ -33,13 +33,16 @@ ALL_ARGUMENTS="$@"
 ARGUMENTS=$(echo $ALL_ARGUMENTS  | sed -e "s/$IS_STATIC_ARGUMENT//")
 
 
-# Find and print the location of Carthage
+# Find the Carthage binary
 CARTHAGE_PATH=$(which carthage)
 
 if [ -z "$CARTHAGE_PATH" ]; then
     echo "Carthage is not installed or not in the PATH."
-else
-    echo "Carthage is located at: $CARTHAGE_PATH"
+    exit 1
 fi
 
-/usr/local/bin/carthage $ARGUMENTS
+# Use the found Carthage binary to run commands
+echo "Using Carthage located at: $CARTHAGE_PATH"
+
+# Example: Running Carthage update
+"$CARTHAGE_PATH" $ARGUMENTS
