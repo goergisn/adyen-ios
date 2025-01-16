@@ -31,4 +31,15 @@ export XCODE_XCCONFIG_FILE="$xcconfig"
 IS_STATIC_ARGUMENT="--static"
 ALL_ARGUMENTS="$@"
 ARGUMENTS=$(echo $ALL_ARGUMENTS  | sed -e "s/$IS_STATIC_ARGUMENT//")
+
+
+# Find and print the location of Carthage
+CARTHAGE_PATH=$(which carthage)
+
+if [ -z "$CARTHAGE_PATH" ]; then
+    echo "Carthage is not installed or not in the PATH."
+else
+    echo "Carthage is located at: $CARTHAGE_PATH"
+fi
+
 /usr/local/bin/carthage $ARGUMENTS
