@@ -44,7 +44,7 @@ class ThreeDS2ClassicActionHandlerTests: XCTestCase {
     func testWrappedComponent() {
         let sut = ThreeDS2ClassicActionHandler(apiContext: Dummy.context, appearanceConfiguration: ADYAppearanceConfiguration())
         XCTAssertEqual(sut.wrappedComponent.apiContext.clientKey, Dummy.context.clientKey)
-        
+
         XCTAssertEqual(sut.wrappedComponent.apiContext.environment.baseURL, Dummy.context.environment.baseURL)
 
         sut._isDropIn = false
@@ -55,15 +55,15 @@ class ThreeDS2ClassicActionHandlerTests: XCTestCase {
     }
 
     func testFingerprintFlowSuccess() throws {
-        
+
         let service = AnyADYServiceMock()
         service.authenticationRequestParameters = authenticationRequestParameters
-        
+
         let fingerprint = try ThreeDS2Component.Fingerprint(
             authenticationRequestParameters: authenticationRequestParameters
         )
-        let expectedFingerprint = try Coder.encodeBase64(fingerprint)
-        
+        let expectedFingerprintJSON = try Coder.encode(fingerprint) as String
+
         let resultExpectation = expectation(description: "Expect ThreeDS2ActionHandler completion closure to be called.")
         let sut = ThreeDS2ClassicActionHandler(apiContext: Dummy.context, service: service)
         sut.handle(fingerprintAction) { fingerprintResult in
@@ -75,7 +75,12 @@ class ThreeDS2ClassicActionHandlerTests: XCTestCase {
                     let details = details as! ThreeDS2Details
                     switch details {
                     case let .fingerprint(fingerprint):
-                        XCTAssertEqual(fingerprint, expectedFingerprint)
+                        if let data = Data(base64Encoded: fingerprint),
+                           let receivedFingerprintJSON = String(data: data, encoding: .utf8) {
+                            XCTAssertTrue(self.compareJSONStrings(expectedFingerprintJSON, receivedFingerprintJSON))
+                        } else {
+                            XCTFail()
+                        }
                     default:
                         XCTFail()
                     }
@@ -87,7 +92,7 @@ class ThreeDS2ClassicActionHandlerTests: XCTestCase {
             }
             resultExpectation.fulfill()
         }
-        
+
         waitForExpectations(timeout: 2, handler: nil)
     }
 
@@ -269,4 +274,23 @@ class ThreeDS2ClassicActionHandlerTests: XCTestCase {
         waitForExpectations(timeout: 2, handler: nil)
     }
 
+    // MARK: - Private
+
+    func compareJSONStrings(_ jsonString1: String, _ jsonString2: String) -> Bool {
+        guard let data1 = jsonString1.data(using: .utf8),
+              let data2 = jsonString2.data(using: .utf8) else {
+            print("Invalid data.")
+            return false
+        }
+
+        do {
+            let dict1 = try JSONSerialization.jsonObject(with: data1, options: [.allowFragments]) as? [String: Any]
+            let dict2 = try JSONSerialization.jsonObject(with: data2, options: [.allowFragments]) as? [String: Any]
+
+            return NSDictionary(dictionary: dict1 ?? [:]).isEqual(to: dict2 ?? [:])
+        } catch {
+            print("Error decoding JSON: \(error)")
+            return false
+        }
+    }
 }
