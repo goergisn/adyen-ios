@@ -2,7 +2,9 @@ name: 👀 Detect public API changes
 
 on:
   pull_request_target:
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened, labeled, unlabeled, edited]
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled, edited]
   workflow_dispatch:
     inputs:
       new:
@@ -11,6 +13,10 @@ on:
       old:
         description: 'Branch/tag of the old/comparison version'
         required: true
+    
+permissions:
+  pull-requests: write
+  issues: write
       
 jobs:
   build:
