@@ -34,13 +34,6 @@ jobs:
        
     - name: 👾 Define Diff Versions
       run: |
-        # Disabling this check from PRs of forked repositories because of insufficient access permissions
-        if [[ "${{ env.headGithubRepo }}" != "${{ env.baseGithubRepo }}" ]]; then
-          echo "The head repository is different from the base repository. Exiting..."
-          echo "skip_workflow=true" >> $GITHUB_ENV
-          exit 0
-        fi
-        
         NEW="${{ env.source }}~${{ env.headGithubRepo }}"
         OLD="${{ env.target }}~${{ env.baseGithubRepo }}"
         
