@@ -82,7 +82,8 @@ public class ApplePayComponent: NSObject, PresentableComponent, PaymentComponent
     }
 
     public var viewController: UIViewController {
-        createPaymentAuthorizationViewController()
+        sendDidLoadEvent()
+        return createPaymentAuthorizationViewController()
     }
 
     public func didFinalize(with success: Bool, completion: (() -> Void)?) {
