@@ -1,70 +1,36 @@
 name: 👀 Detect public API changes
 
 on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, labeled, unlabeled, edited]
+
   pull_request:
-    types: [opened, synchronize, reopened]
-  workflow_dispatch:
-    inputs:
-      new:
-        description: 'Branch/tag of the new/updated version'
-        required: true
-      old:
-        description: 'Branch/tag of the old/comparison version'
-        required: true
+    types: [opened, synchronize, reopened, labeled, unlabeled, edited]
+    
+permissions:
+  pull-requests: write
       
 jobs:
+
   build:
-    runs-on: macos-14 # Apple Silicon Runner
-    
+    runs-on: macos-14
+
     steps:
     - uses: actions/checkout@v4
-    - uses: n1hility/cancel-previous-runs@v3
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Select latest Xcode
       uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '15.4'
+        xcode-version: '16.1'
         
     - name: 🚚 Fetch repo
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
-       
-    - name: 👾 Define Diff Versions
-      run: |
-        # Disabling this check from PRs of forked repositories because of insufficient access permissions
-        if [[ "${{ env.headGithubRepo }}" != "${{ env.baseGithubRepo }}" ]]; then
-          echo "The head repository is different from the base repository. Exiting..."
-          echo "skip_workflow=true" >> $GITHUB_ENV
-          exit 0
-        fi
-        
-        NEW="${{ env.source }}~${{ env.headGithubRepo }}"
-        OLD="${{ env.target }}~${{ env.baseGithubRepo }}"
-        
-        if [[ '${{ github.head_ref || env.noTargetBranch }}' == release/* ]]
-        then
-            LATEST_TAG=$(git describe --tags --abbrev=0)
-            OLD="$LATEST_TAG~${{ env.baseGithubRepo }}" 
-        fi
-        
-        # Providing the output to the environment
-        echo "OLD_VERSION=$OLD" >> $GITHUB_ENV
-        echo "NEW_VERSION=$NEW" >> $GITHUB_ENV
-      env:
-        source: '${{ github.event.inputs.new || github.head_ref }}'
-        target: '${{ github.event.inputs.old || github.event.pull_request.base.ref }}'
-        headGithubRepo: '${{github.server_url}}/${{ github.event.pull_request.head.repo.full_name || github.repository}}.git'
-        baseGithubRepo: '${{github.server_url}}/${{github.repository}}.git'
-        noTargetBranch: 'no target branch'
 
-    - name: 🔍 Detect Changes
-      if: env.skip_workflow != 'true'
-      uses: Adyen/adyen-swift-public-api-diff@0.7.0
-      id: public_api_diff
+    - if: ${{ github.event.pull_request.base.ref != '' }}
+      name: Test Comment PR
+      uses: thollander/actions-comment-pull-request@v3
       with:
-        platform: "iOS"
-        new: ${{ env.NEW_VERSION }}
-        old: ${{ env.OLD_VERSION }}
+        message: "Hello World"
+        comment-tag: test_comment
