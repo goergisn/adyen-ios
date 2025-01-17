@@ -32,5 +32,5 @@ jobs:
       name: Test Comment PR
       uses: thollander/actions-comment-pull-request@v3
       with:
-        message: "Hello World"
+        message: "Hello World from Fork"
         comment-tag: test_comment
